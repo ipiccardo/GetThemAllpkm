@@ -26,7 +26,6 @@ export default function PokemonData({ pokemon, isCatched }) {
     const baseStat = stat.base_stat;
     const name = stat.stat.name;
     if (name === "hp" || name === "attack") {
-      console.log(name === "hp" && baseStat, "base");
       return {
         baseStat,
         name,
@@ -37,7 +36,8 @@ export default function PokemonData({ pokemon, isCatched }) {
   const hp = stats.find((element) => element.name === "hp");
   const attack = stats.find((element) => element.name === "attack");
 
-  console.log(pokemon, "pokemon");
+  console.log(types, "tipos");
+
   const [catched, setCatched] = useState(false);
 
   const handleSelect = () => {
@@ -74,21 +74,26 @@ export default function PokemonData({ pokemon, isCatched }) {
         <Stack direction="row" spacing="5">
           <Stack>
             <Text fontSize="sm">Weight</Text>
-            <Text>20</Text>
+            <Text>{weight}</Text>
           </Stack>
           <Stack>
             <Text fontSize="sm">Height</Text>
-            <Text>12</Text>
+            <Text>{height}</Text>
           </Stack>
           <Stack>
             <Text fontSize="sm">Movimientos</Text>
-            <Text>109</Text>
+            <Text>{moves.length}</Text>
           </Stack>
           <Stack>
             <Text fontSize="sm">Tipos</Text>
             <HStack>
-              <Badge>Agua</Badge>
-              <Badge>Agua</Badge>
+              {types.map((type, index) => {
+                return (
+                  <div key={index}>
+                    <Badge>{type.type.name}</Badge>
+                  </div>
+                );
+              })}
             </HStack>
           </Stack>
         </Stack>
