@@ -52,19 +52,15 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "DELETE") {
     try {
-      const query = req.query;
-      const { pokemonId } = query;
+      const { pokemonId } = req.query;
 
-      const index = await db.getIndex(
-        "/catchedPokemon",
-        (pokemon) => pokemon.id === Number(pokemonId)
+      await db.delete(
+        "/catchedPokemon[" +
+          (await db.getIndex("/catchedPokemon", Number(pokemonId))) +
+          "]"
       );
-      if (index !== -1) {
-        await db.delete(`/catchedPokemon[${index}]`);
-        return res.status(200).send("Pokemon liberado");
-      } else {
-        return res.status(404).send("Pokemon no encontrado");
-      }
+
+      return res.status(200).send("Pokemon liberado");
     } catch (error) {
       console.error("Error al eliminar datos:", error);
       return res.status(500).json({ error: "Error interno del servidor" });

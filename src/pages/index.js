@@ -66,10 +66,23 @@ export default function Home() {
       .then((res) => {
         setCatchedPkm(res.data);
       })
+
       .catch((error) => {
         console.error("Error al llamar a la API:", error);
       });
   }, []);
+
+  function handleUpdateCatched(pokemonId) {
+    axios
+      .get(`api/catched/`)
+      .then((res) => {
+        setCatchedPkm(res.data);
+        setIsCatched(catchedPkm.some((pkm) => pkm.id === pokemonId));
+      })
+      .catch((error) => {
+        console.error("Error al llamar a la API:", error);
+      });
+  }
 
   return (
     <>
@@ -109,7 +122,11 @@ export default function Home() {
           <ModalCloseButton />
           <ModalBody>
             {selectedPokemon && (
-              <PokemonData pokemon={selectedPokemon} isCatched={isCatched} />
+              <PokemonData
+                pokemon={selectedPokemon}
+                isCatched={isCatched}
+                onUpdateCatched={handleUpdateCatched}
+              />
             )}
           </ModalBody>
         </ModalContent>

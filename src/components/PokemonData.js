@@ -19,7 +19,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function PokemonData({ pokemon, isCatched }) {
+export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
   const { weight, height, moves, types } = pokemon;
 
   const stats = pokemon.stats.map((stat) => {
@@ -36,8 +36,6 @@ export default function PokemonData({ pokemon, isCatched }) {
   const hp = stats.find((element) => element.name === "hp");
   const attack = stats.find((element) => element.name === "attack");
 
-  console.log(types, "tipos");
-
   const [catched, setCatched] = useState(false);
 
   const handleSelect = () => {
@@ -45,16 +43,29 @@ export default function PokemonData({ pokemon, isCatched }) {
       id: pokemon.id,
       name: pokemon.name,
     };
-
-    axios
-      .post(`api/catched/`, pokemonData)
-      .then((res) => {
-        setCatched(true);
-        return res;
-      })
-      .catch((error) => {
-        console.error("Error al llamar a la API:", error);
-      });
+    if (!isCatched) {
+      axios
+        .post(`api/catched/`, pokemonData)
+        .then((res) => {
+          setCatched(true);
+          onUpdateCatched(pokemon.id);
+          return res;
+        })
+        .catch((error) => {
+          console.error("Error al llamar a la API:", error);
+        });
+    } else {
+      axios
+        .delete(`api/catched/${pokemon.id}`)
+        .then((res) => {
+          setCatched(true);
+          onUpdateCatched(pokemon.id);
+          return res;
+        })
+        .catch((error) => {
+          console.error("Error al llamar a la API:", error);
+        });
+    }
   };
 
   return (
