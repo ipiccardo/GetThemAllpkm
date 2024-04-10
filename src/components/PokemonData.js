@@ -20,6 +20,24 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function PokemonData({ pokemon, isCatched }) {
+  const { weight, height, moves, types } = pokemon;
+
+  const stats = pokemon.stats.map((stat) => {
+    const baseStat = stat.base_stat;
+    const name = stat.stat.name;
+    if (name === "hp" || name === "attack") {
+      console.log(name === "hp" && baseStat, "base");
+      return {
+        baseStat,
+        name,
+      };
+    }
+  });
+
+  const hp = stats.find((element) => element.name === "hp");
+  const attack = stats.find((element) => element.name === "attack");
+
+  console.log(pokemon, "pokemon");
   const [catched, setCatched] = useState(false);
 
   const handleSelect = () => {
@@ -79,11 +97,11 @@ export default function PokemonData({ pokemon, isCatched }) {
       <Stack spacing="5" p="5" bg="gray.100" borderRadius="xl">
         <Stack>
           <Text fontSize="xs">hp</Text>
-          <Progress bg="gray.300" borderRadius="full" value={80} />
+          <Progress bg="gray.300" borderRadius="full" value={hp.baseStat} />
         </Stack>
         <Stack>
           <Text fontSize="xs">attack</Text>
-          <Progress bg="gray.300" borderRadius="full" value={65} />
+          <Progress bg="gray.300" borderRadius="full" value={attack.baseStat} />
         </Stack>
       </Stack>
     </Stack>
