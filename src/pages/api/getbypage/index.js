@@ -1,9 +1,10 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
+  const { limit, offset } = req.query;
   try {
     const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0`
+      `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
     );
     const pokemons = response.data;
     res.status(200).json(pokemons);
