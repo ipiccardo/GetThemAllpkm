@@ -26,39 +26,41 @@ import {
 import PokemonCard from "@/components/pokemonsRender/PokemonCard";
 import PokemonData from "@/components/pokemonsRender/PokemonData";
 import MyLoader from "@/components/loader/Skeletons";
+import CustomPagination from "../Pagination/Pagination";
 
 const PokemonGrid = () => {
   const pokemonDataModal = useDisclosure();
+  const [page, setPage] = useState(0);
+  const pageCount = 58;
 
   const [isLoading, setIsLoading] = useState(true);
   const [pokemon, setPokemon] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState();
   const [limit, setLimit] = useState(20);
-  const [offset, setOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(
-    `api/getbypage?limit=${limit}&offset=${offset}`
+    `api/getbypage?limit=${limit}&page=${0}`
   );
   const [catchedPkm, setCatchedPkm] = useState();
   const [isCatched, setIsCatched] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
+    setPokemon([]);
     axios.get(currentPage).then(async ({ data }) => {
       const promises = data.results.map((result) => axios(result.url));
       const fetchedPokemon = (await Promise.all(promises)).map(
         (res) => res.data
       );
-      // setPokemonsToShow(data.next);
       setPokemon((prev) => [...prev, ...fetchedPokemon]);
       setIsLoading(false);
     });
   }, [currentPage]);
 
-  function handleNextPage() {
-    //   setCurrentPage(pokemonstoShow);
-  }
-
-  // function handlePrevious() {}
+  useEffect(() => {
+    setCurrentPage(
+      `api/getbypage?limit=${limit}&page=${page > 0 ? page * 20 : 0}`
+    );
+  }, [page]);
 
   function handleViewPokemon(pokemon) {
     if (catchedPkm.some((pkm) => pkm.id === pokemon.id)) {
@@ -97,9 +99,9 @@ const PokemonGrid = () => {
   if (isLoading) {
     return (
       <Flex alignItems="center" minH="100vh" justifyContent="center">
-        <Container maxW="container.lg">
+        <Container p="10" maxW="container.lg">
           <Stack p="5" alignItems="center" spacing="5">
-            <SimpleGrid spacing="5" columns={{ base: 1, md: 5 }}>
+            <SimpleGrid mt="10" spacing="5" columns={{ base: 1, md: 5 }}>
               {Array.from({ length: 20 }).map((_, index) => (
                 <Box key={index}>
                   <MyLoader />
@@ -115,9 +117,9 @@ const PokemonGrid = () => {
   return (
     <>
       <Flex alignItems="center" minH="100vh" justifyContent="center">
-        <Container maxW="container.lg">
-          <Stack p="5" alignItems="center" spacing="5">
-            <SimpleGrid spacing="5" columns={{ base: 1, md: 5 }}>
+        <Container p="10" maxW="container.lg">
+          <Stack pt="5" alignItems="center" spacing="5">
+            <SimpleGrid mt="10" spacing="5" columns={{ base: 1, md: 5 }}>
               {pokemon.map((pokemon) => (
                 <Box
                   as="button"
@@ -129,9 +131,13 @@ const PokemonGrid = () => {
               ))}
             </SimpleGrid>
             {!isLoading && (
-              <Button isLoading={isLoading} onClick={handleNextPage}>
-                Cargas más
-              </Button>
+              <>
+                <CustomPagination
+                  setPage={setPage}
+                  page={page}
+                  pageCount={pageCount}
+                />
+              </>
             )}
           </Stack>
         </Container>
