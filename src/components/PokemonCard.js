@@ -6,6 +6,7 @@ import {
   Badge,
   AspectRatio,
 } from "@chakra-ui/react";
+import { colorTipos } from "@/utils/colorTypes";
 
 export default function PokemonCard({ pokemon }) {
   return (
@@ -27,7 +28,13 @@ export default function PokemonCard({ pokemon }) {
       </Text>
       <HStack>
         {pokemon.types.map((type) => (
-          <Badge size="xs" key={type.slot}>
+          <Badge
+            size="xs"
+            key={type.slot}
+            backgroundColor={colorTipos(type.type.name)}
+            textColor={"white"}
+            borderRadius={5}
+          >
             {type.type.name}
           </Badge>
         ))}

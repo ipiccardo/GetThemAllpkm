@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import style from "../table/table.module.css";
+import { colorTipos } from "../../utils/colorTypes";
 
 const CatchedTable = ({ listCatched }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,17 +60,22 @@ const CatchedTable = ({ listCatched }) => {
                     <Td>{pokemon.name}</Td>
                     <Td>
                       <Stack direction="row">
-                        {pokemon.types.map((type, index) => (
-                          <Badge
-                            borderRadius={5}
-                            variant="solid"
-                            colorScheme="green"
-                            key={index}
-                            padding={2}
-                          >
-                            {type.type.name}
-                          </Badge>
-                        ))}
+                        {pokemon.types.map((type, index) => {
+                          return (
+                            <>
+                              <Badge
+                                borderRadius={5}
+                                variant="solid"
+                                colorScheme={colorTipos(type.type.name)}
+                                key={index}
+                                padding={2}
+                                backgroundColor={colorTipos(type.type.name)}
+                              >
+                                {type.type.name}
+                              </Badge>
+                            </>
+                          );
+                        })}
                       </Stack>
                     </Td>
                     <Td>

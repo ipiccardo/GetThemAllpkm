@@ -29,7 +29,7 @@ const index = () => {
       <Flex alignItems="center" minH="100vh" justifyContent="center">
         <Container maxW="container.lg">
           <div className={style.tableContainer}>
-            <Stack mt={20}>
+            <Stack>
               {Array.from({ length: 8 }).map((_, index) => (
                 <Skeleton key={index} height="100px" />
               ))}

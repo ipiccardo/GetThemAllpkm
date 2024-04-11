@@ -5,10 +5,6 @@
   font-size: 20px;
 }
 
-.tableContainer {
-  margin-top: 3rem;
-}
-
 .withOutPkms {
   display: flex;
   justify-content: center;
