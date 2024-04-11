@@ -10,6 +10,8 @@ export default async function handler(req, res) {
     const newPokemon = {
       id: req.body.id,
       name: req.body.name,
+      image: req.body.image,
+      types: req.body.types,
     };
 
     const existingPokemon = await db.getData("/catchedPokemon");

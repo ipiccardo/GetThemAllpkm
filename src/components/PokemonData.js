@@ -45,6 +45,7 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
       id: pokemon.id,
       name: pokemon.name,
       image: sprites.other.dream_world.front_default,
+      types: pokemon.types,
     };
     if (!isCatched) {
       axios

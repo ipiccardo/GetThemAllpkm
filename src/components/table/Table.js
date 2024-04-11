@@ -10,11 +10,12 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Stack,
+  Badge,
 } from "@chakra-ui/react";
+import Image from "next/image";
 
 const CatchedTable = ({ listCatched }) => {
-  console.log(listCatched, "a ver");
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,13 +26,15 @@ const CatchedTable = ({ listCatched }) => {
     return <h1>Aún no has capturado ningún pokemon</h1>;
   }
 
+  console.log(listCatched);
+
   return (
     <TableContainer>
       <Table variant="simple">
         <Thead>
           <Tr>
             <Th>Name</Th>
-            <Th>Species</Th>
+            <Th>Types</Th>
             <Th>Image</Th>
           </Tr>
         </Thead>
@@ -39,9 +42,27 @@ const CatchedTable = ({ listCatched }) => {
           {listCatched?.map((pokemon) => (
             <Tr key={pokemon.id}>
               <Td>{pokemon.name}</Td>
-              <Td>{pokemon.species}</Td>
               <Td>
-                <img src={pokemon.image} alt={pokemon.name} />
+                <Stack direction="row">
+                  {pokemon.types.map((type, index) => (
+                    <Badge
+                      borderRadius={2}
+                      variant="solid"
+                      colorScheme="green"
+                      key={index}
+                    >
+                      {type.type.name}
+                    </Badge>
+                  ))}
+                </Stack>
+              </Td>
+              <Td>
+                <Image
+                  height={100}
+                  width={100}
+                  src={pokemon.image}
+                  alt={pokemon.name}
+                />
               </Td>
             </Tr>
           ))}
