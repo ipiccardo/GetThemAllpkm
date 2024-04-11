@@ -26,7 +26,17 @@ const CatchedTable = ({ listCatched }) => {
   }, [listCatched]);
 
   if (!listCatched?.length && !isLoading) {
-    return <h1>Aún no has capturado ningún pokemon</h1>;
+    return (
+      <>
+        <Flex alignItems="center" minH="100vh" justifyContent="center">
+          <Container maxW="container.lg">
+            <div className={style.withOutPkms}>
+              <h1>Aún no has capturado ningún pokemon</h1>
+            </div>
+          </Container>
+        </Flex>
+      </>
+    );
   }
 
   console.log(listCatched);
@@ -75,12 +85,6 @@ const CatchedTable = ({ listCatched }) => {
                   </Tr>
                 ))}
               </Tbody>
-              <Tfoot>
-                <Tr>
-                  <Th>Total</Th>
-                  <Th>{listCatched?.length}</Th>
-                </Tr>
-              </Tfoot>
             </Table>
           </TableContainer>
         </div>
