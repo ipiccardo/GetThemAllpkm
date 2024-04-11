@@ -31,7 +31,7 @@ const index = () => {
           <div className={style.tableContainer}>
             <Stack mt={20}>
               {Array.from({ length: 8 }).map((_, index) => (
-                <Skeleton height="100px" />
+                <Skeleton key={index} height="100px" />
               ))}
             </Stack>
           </div>

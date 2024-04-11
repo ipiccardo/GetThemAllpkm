@@ -5,7 +5,7 @@ import NavLinks from "./NavLinks";
 
 export default function NavBar({ links }) {
   return (
-    <Box bg="burlywood" w="100%" p={4} color="white" position={"absolute"}>
+    <Box bg="burlywood" w="100%" p={4} color="white" position={"fixed"}>
       <NavLinks />
     </Box>
   );

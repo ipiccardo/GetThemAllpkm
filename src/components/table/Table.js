@@ -39,8 +39,6 @@ const CatchedTable = ({ listCatched }) => {
     );
   }
 
-  console.log(listCatched);
-
   return (
     <Flex alignItems="center" minH="100vh" justifyContent="center">
       <Container maxW="container.lg">

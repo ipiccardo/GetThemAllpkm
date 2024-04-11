@@ -22,8 +22,6 @@ import { useEffect, useState } from "react";
 export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
   const { weight, height, moves, types, sprites } = pokemon;
 
-  console.log(pokemon, "pokemon");
-
   const stats = pokemon.stats.map((stat) => {
     const baseStat = stat.base_stat;
     const name = stat.stat.name;
