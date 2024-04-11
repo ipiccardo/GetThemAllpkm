@@ -2,15 +2,20 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import CatchedTable from "../../components/table/Table";
+import MyLoader from "@/components/loader/Skeletons";
 
 const index = () => {
   const [listCatched, setListCatched] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`api/catched/`)
       .then((res) => {
         setListCatched(res.data);
+        setIsLoading(false);
       })
 
       .catch((error) => {
@@ -18,18 +23,11 @@ const index = () => {
       });
   }, []);
 
-  console.log(listCatched, "listcatched");
+  if (isLoading) {
+    return <MyLoader />;
+  }
 
-  return (
-    <>
-      <h1>Catched</h1>
-      <ul>
-        {listCatched?.map((pokemon, index) => {
-          return <li key={pokemon.id}>{pokemon.name}</li>;
-        })}
-      </ul>
-    </>
-  );
+  return <>{!isLoading && <CatchedTable listCatched={listCatched} />}</>;
 };
 
 export default index;

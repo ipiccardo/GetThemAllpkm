@@ -20,7 +20,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
-  const { weight, height, moves, types } = pokemon;
+  const { weight, height, moves, types, sprites } = pokemon;
+
+  console.log(pokemon, "pokemon");
 
   const stats = pokemon.stats.map((stat) => {
     const baseStat = stat.base_stat;
@@ -42,6 +44,7 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
     const pokemonData = {
       id: pokemon.id,
       name: pokemon.name,
+      image: sprites.other.dream_world.front_default,
     };
     if (!isCatched) {
       axios

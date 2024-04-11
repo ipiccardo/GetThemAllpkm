@@ -6,8 +6,6 @@ import styles from "./nav.module.css";
 const NavLinks = () => {
   const pathName = usePathname();
 
-  console.log(pathName, "pathName");
-
   const links = [
     {
       name: "Home",

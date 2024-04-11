@@ -20,22 +20,21 @@ import {
   ModalContent,
   ModalCloseButton,
   useDisclosure,
+  Skeleton,
 } from "@chakra-ui/react";
 import PokemonCard from "@/components/PokemonCard";
 import PokemonData from "@/components/PokemonData";
-import NavBar from "../components/nav/NavBar";
+import MyLoader from "@/components/loader/Skeletons";
 
 export default function Home() {
   const pokemonDataModal = useDisclosure();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [pokemon, setPokemon] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState();
   const [pokemonstoShow, setPokemonsToShow] = useState(20);
   const [sinceWhere, setSinceWhere] = useState(0);
-  const [currentPage, setCurrentPage] = useState(
-    `https://pokeapi.co/api/v2/pokemon/?limit=${pokemonstoShow}&offset=${sinceWhere}`
-  );
+  const [currentPage, setCurrentPage] = useState("api/getbypage");
   const [catchedPkm, setCatchedPkm] = useState();
   const [isCatched, setIsCatched] = useState(false);
 
@@ -92,6 +91,24 @@ export default function Home() {
       });
   }
 
+  if (isLoading) {
+    return (
+      <Flex alignItems="center" minH="100vh" justifyContent="center">
+        <Container maxW="container.lg">
+          <Stack p="5" alignItems="center" spacing="5">
+            <SimpleGrid spacing="5" columns={{ base: 1, md: 5 }}>
+              {Array.from({ length: 20 }).map((_, index) => (
+                <Box key={index}>
+                  <MyLoader />
+                </Box>
+              ))}
+            </SimpleGrid>
+          </Stack>
+        </Container>
+      </Flex>
+    );
+  }
+
   return (
     <>
       <Head>
@@ -114,10 +131,11 @@ export default function Home() {
                 </Box>
               ))}
             </SimpleGrid>
-
-            <Button isLoading={false} onClick={handleNextPage}>
-              Cargas más
-            </Button>
+            {!isLoading && (
+              <Button isLoading={isLoading} onClick={handleNextPage}>
+                Cargas más
+              </Button>
+            )}
           </Stack>
         </Container>
       </Flex>
