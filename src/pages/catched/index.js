@@ -23,10 +23,6 @@ const index = () => {
       });
   }, []);
 
-  if (isLoading) {
-    return <MyLoader />;
-  }
-
   return <>{!isLoading && <CatchedTable listCatched={listCatched} />}</>;
 };
 
