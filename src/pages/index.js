@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import PokemonCard from "@/components/PokemonCard";
 import PokemonData from "@/components/PokemonData";
+import NavBar from "../components/nav/NavBar";
 
 export default function Home() {
   const pokemonDataModal = useDisclosure();
@@ -30,8 +31,10 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [pokemon, setPokemon] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState();
+  const [pokemonstoShow, setPokemonsToShow] = useState(20);
+  const [sinceWhere, setSinceWhere] = useState(0);
   const [currentPage, setCurrentPage] = useState(
-    "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0"
+    `https://pokeapi.co/api/v2/pokemon/?limit=${pokemonstoShow}&offset=${sinceWhere}`
   );
   const [catchedPkm, setCatchedPkm] = useState();
   const [isCatched, setIsCatched] = useState(false);
@@ -43,12 +46,17 @@ export default function Home() {
       const fetchedPokemon = (await Promise.all(promises)).map(
         (res) => res.data
       );
+      setPokemonsToShow(data.next);
       setPokemon((prev) => [...prev, ...fetchedPokemon]);
       setIsLoading(false);
     });
   }, [currentPage]);
 
-  function handleNextPage() {}
+  function handleNextPage() {
+    //   setCurrentPage(pokemonstoShow);
+  }
+
+  // function handlePrevious() {}
 
   function handleViewPokemon(pokemon) {
     if (catchedPkm.some((pkm) => pkm.id === pokemon.id)) {

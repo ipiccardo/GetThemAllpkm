@@ -1,0 +1,16 @@
+.navBar {
+  display: flex;
+  gap: 1rem;
+}
+
+.navBar li {
+  list-style: none;
+}
+
+.navBar li:hover {
+  color: rgb(101, 67, 33);
+}
+
+.links {
+  color: rgb(101, 67, 33);
+}
