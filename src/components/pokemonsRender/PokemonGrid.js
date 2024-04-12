@@ -104,9 +104,9 @@ const PokemonGrid = () => {
             </>
             <SimpleGrid mt="10" spacing="5" columns={{ base: 1, md: 5 }}>
               {Array.from({ length: 20 }).map((_, index) => (
-                <Box key={index}>
+                <div key={index}>
                   <MyLoader />
-                </Box>
+                </div>
               ))}
             </SimpleGrid>
             <CustomPagination
