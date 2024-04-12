@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       const { pokemonId } = query;
       const data = await db.getData("/catchedPokemon");
 
-      const isPokemonCatched = data.some(
+      const isPokemonCatched = data?.some(
         (pokemon) => pokemon.id === Number(pokemonId)
       );
 
