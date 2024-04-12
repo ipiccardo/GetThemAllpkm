@@ -128,6 +128,7 @@ const PokemonGrid = () => {
               <SearchBar
                 setSinglePokemon={setSinglePokemon}
                 singlePokemon={singlePokemon}
+                setIsLoading={setIsLoading}
               />
             </>
             {Object.keys(singlePokemon).length === 0 ? (
@@ -162,7 +163,7 @@ const PokemonGrid = () => {
           </Stack>
         </Container>
       </Flex>
-      <Modal {...pokemonDataModal}>
+      <Modal {...pokemonDataModal} size={{ base: "lg", xm: "full" }}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textTransform="capitalize">

@@ -12,6 +12,7 @@ import {
 import { colorTipos } from "@/utils/colorTypes";
 import axios from "axios";
 import { useState } from "react";
+import styles from "./pokemonrender.module.css";
 
 export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
   const { weight, height, moves, types, sprites } = pokemon;
@@ -94,7 +95,7 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
           </Stack>
           <Stack>
             <Text fontSize="sm">Tipos</Text>
-            <HStack>
+            <div className={styles.typesContainer}>
               {types.map((type, index) => {
                 return (
                   <div key={index}>
@@ -107,7 +108,7 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
                   </div>
                 );
               })}
-            </HStack>
+            </div>
           </Stack>
         </Stack>
       </Stack>

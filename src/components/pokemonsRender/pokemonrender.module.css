@@ -3,3 +3,14 @@
   max-width: 500px;
   margin: 0 auto;
 }
+
+.typesContainer {
+  display: flex;
+  gap: 5px;
+}
+
+@media (max-width: 500px) {
+  .typesContainer {
+    flex-direction: column;
+  }
+}
