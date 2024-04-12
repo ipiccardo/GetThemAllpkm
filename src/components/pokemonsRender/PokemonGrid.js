@@ -89,7 +89,7 @@ const PokemonGrid = () => {
       .get(`api/catched/`)
       .then((res) => {
         setCatchedPkm(res.data);
-        setIsCatched(catchedPkm.some((pkm) => pkm.id === pokemonId));
+        setIsCatched(catchedPkm?.some((pkm) => pkm.id === pokemonId));
       })
       .catch((error) => {
         console.error("Error al llamar a la API:", error);
