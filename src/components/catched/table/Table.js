@@ -46,17 +46,15 @@ const CatchedTable = ({ listCatched }) => {
     <Flex alignItems="center" minH="100vh" justifyContent="center">
       <Container maxW="container.lg" mt={10}>
         <div className={style.tableContainer}>
-          <Heading as="h1" size="lg" mb={6}>
-            <Heading
-              as="h1"
-              size="lg"
-              mb={6}
-              textAlign="center"
-              borderBottom="1px solid burlywood"
-              pb={2}
-            >
-              <Box>My Team</Box>
-            </Heading>
+          <Heading
+            as="h1"
+            size="lg"
+            mb={6}
+            textAlign="center"
+            borderBottom="1px solid burlywood"
+            pb={2}
+          >
+            <Box>My Team</Box>
           </Heading>
           <TableContainer width={`100%`} mt={10}>
             <Table variant="simple">

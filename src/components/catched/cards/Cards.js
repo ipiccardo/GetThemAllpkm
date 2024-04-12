@@ -25,17 +25,15 @@ const CatchedCards = ({ listCatched }) => {
 
   return (
     <Container maxW="container.lg" mt={10}>
-      <Heading as="h1" size="lg" mb={6}>
-        <Heading
-          as="h1"
-          size="lg"
-          mb={6}
-          textAlign="center"
-          borderBottom="1px solid burlywood"
-          pb={2}
-        >
-          <Box>My Team</Box>
-        </Heading>
+      <Heading
+        as="h1"
+        size="lg"
+        mb={6}
+        textAlign="center"
+        borderBottom="1px solid burlywood"
+        pb={2}
+      >
+        <Box>My Team</Box>
       </Heading>
       <Box>Total atrapados: {listCatched.length}</Box>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="40px">

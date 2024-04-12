@@ -27,7 +27,7 @@ import MyLoader from "@/components/loader/MyLoader";
 import CustomPagination from "../pagination/Pagination";
 import SearchBar from "../searchBar/SearchBar";
 import PokemonCatchedCard from "../catched/cards/PokemonCatchedCard";
-import Loading from "../loader/LoadingDashboard";
+import LoadingDashboard from "../loader/LoadingDashboard";
 
 const PokemonGrid = () => {
   const pokemonDataModal = useDisclosure();
@@ -97,7 +97,7 @@ const PokemonGrid = () => {
   }
 
   if (isLoading) {
-    return <Loading isLoading={isLoading} />;
+    return <LoadingDashboard isLoading={isLoading} />;
   }
   return (
     <>

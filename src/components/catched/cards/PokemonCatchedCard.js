@@ -1,18 +1,8 @@
 import React from "react";
-import {
-  Box,
-  Flex,
-  Heading,
-  Badge,
-  Image,
-  SimpleGrid,
-  Container,
-  HStack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, Badge, Image, HStack } from "@chakra-ui/react";
 import { colorTipos } from "../../../utils/colorTypes";
 
-const PokemonCatchedCard = ({ pokemon, fromCatched, totalCatched }) => {
+const PokemonCatchedCard = ({ pokemon, fromCatched }) => {
   return (
     <Flex justify="center">
       <Box
