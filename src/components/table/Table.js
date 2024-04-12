@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import {
   Table,
@@ -62,18 +62,16 @@ const CatchedTable = ({ listCatched }) => {
                       <Stack direction="row">
                         {pokemon.types.map((type, index) => {
                           return (
-                            <>
-                              <Badge
-                                borderRadius={5}
-                                variant="solid"
-                                colorScheme={colorTipos(type.type.name)}
-                                key={index}
-                                padding={2}
-                                backgroundColor={colorTipos(type.type.name)}
-                              >
-                                {type.type.name}
-                              </Badge>
-                            </>
+                            <Badge
+                              borderRadius={5}
+                              variant="solid"
+                              colorScheme={colorTipos(type.type.name)}
+                              key={index}
+                              padding={2}
+                              backgroundColor={colorTipos(type.type.name)}
+                            >
+                              {type.type.name}
+                            </Badge>
                           );
                         })}
                       </Stack>
