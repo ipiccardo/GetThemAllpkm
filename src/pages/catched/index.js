@@ -5,7 +5,7 @@ import axios from "axios";
 import { Skeleton } from "@chakra-ui/react";
 import CatchedTable from "../../components/table/Table";
 
-const Page = () => {
+const Page = ({ initialData }) => {
   const [listCatched, setListCatched] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,5 +33,16 @@ const Page = () => {
     </>
   );
 };
+
+export async function getServerSideProps() {
+  try {
+    const response = await axios.get(`api/catched/`);
+    const initialData = response.data;
+    return { props: { initialData } };
+  } catch (error) {
+    console.error("Error fetching initial data:", error);
+    return { props: { initialData: [] } };
+  }
+}
 
 export default Page;
