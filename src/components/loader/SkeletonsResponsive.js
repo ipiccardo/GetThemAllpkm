@@ -2,7 +2,6 @@ import { Skeleton } from "@chakra-ui/react";
 import { useBreakpointValue } from "@chakra-ui/react";
 
 const CustomSkeleton = ({ fromCards }) => {
-  // Define el tamaño del skeleton según el ancho de la pantalla
   const skeletonWidth = useBreakpointValue({
     base: "100%",
     sm: "384px",

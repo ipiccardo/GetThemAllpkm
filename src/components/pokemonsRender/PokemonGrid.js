@@ -97,7 +97,7 @@ const PokemonGrid = () => {
   }
 
   if (isLoading) {
-    return <LoadingDashboard isLoading={isLoading} />;
+    return <LoadingDashboard />;
   }
   return (
     <>

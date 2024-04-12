@@ -54,8 +54,11 @@ const CatchedTable = ({ listCatched }) => {
             borderBottom="1px solid burlywood"
             pb={2}
           >
-            <Box>My Team</Box>
+            <Box textColor={"rgb(101, 67, 33)"}>My Team</Box>
           </Heading>
+          <Box textColor={"rgb(101, 67, 33)"}>
+            Total atrapados: {listCatched.length}
+          </Box>
           <TableContainer width={`100%`} mt={10}>
             <Table variant="simple">
               <Thead>

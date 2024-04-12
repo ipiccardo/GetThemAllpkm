@@ -8,8 +8,9 @@ import {
 import SearchBar from "../searchBar/SearchBar";
 import MyLoader from "./MyLoader";
 import CustomPagination from "../pagination/Pagination";
+import CustomSkeleton from "./SkeletonsResponsive";
 
-const LoadingDashboard = ({ isLoading }) => {
+const LoadingDashboard = () => {
   const [isLargerThan766] = useMediaQuery("(min-width: 766px)");
 
   return (
@@ -24,11 +25,19 @@ const LoadingDashboard = ({ isLoading }) => {
             spacing="5"
             columns={isLargerThan766 ? { base: 1, md: 5 } : 1}
           >
-            {Array.from({ length: 20 }).map((_, index) => (
-              <div key={index}>
-                <MyLoader />
-              </div>
-            ))}
+            {isLargerThan766 ? (
+              Array.from({ length: 20 }).map((_, index) => (
+                <div key={new Date().getTime() + index}>
+                  <MyLoader />
+                </div>
+              ))
+            ) : (
+              <>
+                <CustomSkeleton />
+                <CustomSkeleton />
+                <CustomSkeleton />
+              </>
+            )}
           </SimpleGrid>
           <CustomPagination />
         </Stack>

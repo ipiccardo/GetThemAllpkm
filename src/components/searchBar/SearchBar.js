@@ -46,6 +46,10 @@ const SearchBar = ({ setSinglePokemon, singlePokemon, setIsLoading }) => {
     }
   };
 
+  const handleFocus = () => {
+    setErrorMessage("");
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -56,6 +60,7 @@ const SearchBar = ({ setSinglePokemon, singlePokemon, setIsLoading }) => {
           className={styles.input}
           placeholder="Search..."
           onInput={handleCleanInput}
+          onFocus={handleFocus}
         />
         <button className={styles.button} onClick={handleSearch}>
           Search
