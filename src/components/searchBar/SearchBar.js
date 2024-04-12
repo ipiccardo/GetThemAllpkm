@@ -49,7 +49,6 @@ const SearchBar = ({ setSinglePokemon, singlePokemon, setIsLoading }) => {
   const handleFocus = () => {
     setErrorMessage("");
     setSearchValue("");
-    setSinglePokemon({});
   };
 
   return (
