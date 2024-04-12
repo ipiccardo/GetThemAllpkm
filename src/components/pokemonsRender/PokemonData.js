@@ -76,6 +76,7 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
           <Image
             objectFit="contain"
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+            alt={`${pokemon.name}`}
           />
         </AspectRatio>
         <Stack direction="row" spacing="5">

@@ -5,7 +5,7 @@ import axios from "axios";
 import { Skeleton } from "@chakra-ui/react";
 import CatchedTable from "../../components/table/Table";
 
-const index = () => {
+const Page = () => {
   const [listCatched, setListCatched] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,4 +34,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Page;
