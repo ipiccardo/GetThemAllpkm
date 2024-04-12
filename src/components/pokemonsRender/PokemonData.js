@@ -3,21 +3,15 @@ import {
   AspectRatio,
   Image,
   Stack,
-  SimpleGrid,
-  Heading,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
   Progress,
   Text,
-  Tab,
   Badge,
   HStack,
   Checkbox,
 } from "@chakra-ui/react";
+import { colorTipos } from "@/utils/colorTypes";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
   const { weight, height, moves, types, sprites } = pokemon;
@@ -103,7 +97,12 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
               {types.map((type, index) => {
                 return (
                   <div key={index}>
-                    <Badge>{type.type.name}</Badge>
+                    <Badge
+                      textColor={"white"}
+                      backgroundColor={colorTipos(type.type.name)}
+                    >
+                      {type.type.name}
+                    </Badge>
                   </div>
                 );
               })}

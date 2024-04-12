@@ -27,7 +27,7 @@ export default function PokemonCard({ pokemon }) {
         {pokemon.name}
       </Text>
       <HStack>
-        {pokemon.types.map((type) => (
+        {pokemon?.types?.map((type) => (
           <Badge
             size="xs"
             key={type.slot}
