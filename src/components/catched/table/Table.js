@@ -14,10 +14,12 @@ import {
   Badge,
   Flex,
   Container,
+  Heading,
+  Box,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import style from "../table/table.module.css";
-import { colorTipos } from "../../utils/colorTypes";
+import { colorTipos } from "../../../utils/colorTypes";
 
 const CatchedTable = ({ listCatched }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,9 +44,20 @@ const CatchedTable = ({ listCatched }) => {
 
   return (
     <Flex alignItems="center" minH="100vh" justifyContent="center">
-      <Container maxW="container.lg">
+      <Container maxW="container.lg" mt={10}>
         <div className={style.tableContainer}>
-          <h1 className={style.title}>My team</h1>
+          <Heading as="h1" size="lg" mb={6}>
+            <Heading
+              as="h1"
+              size="lg"
+              mb={6}
+              textAlign="center"
+              borderBottom="1px solid burlywood"
+              pb={2}
+            >
+              <Box>My Team</Box>
+            </Heading>
+          </Heading>
           <TableContainer width={`100%`} mt={10}>
             <Table variant="simple">
               <Thead>
@@ -80,7 +93,7 @@ const CatchedTable = ({ listCatched }) => {
                       <Image
                         height={100}
                         width={100}
-                        src={pokemon.image}
+                        src={pokemon.image ? pokemon?.image : "/pokebola.jpg"}
                         alt={pokemon.name}
                       />
                     </Td>

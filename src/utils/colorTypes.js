@@ -37,6 +37,6 @@ export const colorTipos = (tipo) => {
     case "water":
       return "#56a1f2";
     default:
-      return;
+      return "black";
   }
 };

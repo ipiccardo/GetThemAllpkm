@@ -28,17 +28,23 @@ const SearchBar = ({ setSinglePokemon, singlePokemon, setIsLoading }) => {
       })
       .catch((error) => {
         if (error.response.status === 404) {
-          setIsLoading(false);
           setSinglePokemon({});
           setErrorMessage("El Pokémon buscado no existe");
         } else {
-          setIsLoading(false);
           console.error("Error al llamar a la API:", error);
           setSinglePokemon({});
           setErrorMessage("error");
         }
-      });
+      }, setIsLoading(false));
   }
+
+  const handleCleanInput = () => {
+    if (errorMessage !== "" && searchValue !== "") {
+      setErrorMessage("");
+      setSearchValue("");
+      setSinglePokemon("");
+    }
+  };
 
   return (
     <>
@@ -49,6 +55,7 @@ const SearchBar = ({ setSinglePokemon, singlePokemon, setIsLoading }) => {
           onChange={(e) => setSearchValue(e.target.value)}
           className={styles.input}
           placeholder="Search..."
+          onInput={handleCleanInput}
         />
         <button className={styles.button} onClick={handleSearch}>
           Search

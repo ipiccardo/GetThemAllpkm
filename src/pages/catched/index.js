@@ -2,12 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Skeleton } from "@chakra-ui/react";
-import CatchedTable from "../../components/table/Table";
+import { Skeleton, useMediaQuery } from "@chakra-ui/react";
+import CatchedTable from "../../components/catched/table/Table";
+import Cards from "@/components/catched/cards/Cards";
 
 const Page = ({ initialData }) => {
   const [listCatched, setListCatched] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSmallScreen] = useMediaQuery("(max-width: 766px)");
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,6 +24,18 @@ const Page = ({ initialData }) => {
         console.error("Error al llamar a la API:", error);
       });
   }, []);
+
+  if (isSmallScreen) {
+    return (
+      <>
+        {
+          <Skeleton isLoaded={!isLoading}>
+            <Cards listCatched={listCatched} />
+          </Skeleton>
+        }
+      </>
+    );
+  }
 
   return (
     <>

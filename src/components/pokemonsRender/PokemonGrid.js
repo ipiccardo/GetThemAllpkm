@@ -23,9 +23,11 @@ import {
 } from "@chakra-ui/react";
 import PokemonCard from "@/components/pokemonsRender/PokemonCard";
 import PokemonData from "@/components/pokemonsRender/PokemonData";
-import MyLoader from "@/components/loader/Skeletons";
+import MyLoader from "@/components/loader/MyLoader";
 import CustomPagination from "../pagination/Pagination";
 import SearchBar from "../searchBar/SearchBar";
+import PokemonCatchedCard from "../catched/cards/PokemonCatchedCard";
+import Loading from "../loader/LoadingDashboard";
 
 const PokemonGrid = () => {
   const pokemonDataModal = useDisclosure();
@@ -95,29 +97,7 @@ const PokemonGrid = () => {
   }
 
   if (isLoading) {
-    return (
-      <Flex alignItems="center" minH="100vh" justifyContent="center">
-        <Container p="10" maxW="container.lg">
-          <Stack p="5" alignItems="center" spacing="5">
-            <>
-              <SearchBar />
-            </>
-            <SimpleGrid mt="10" spacing="5" columns={{ base: 1, md: 5 }}>
-              {Array.from({ length: 20 }).map((_, index) => (
-                <div key={index}>
-                  <MyLoader />
-                </div>
-              ))}
-            </SimpleGrid>
-            <CustomPagination
-              setPage={setPage}
-              page={page}
-              pageCount={pageCount}
-            />
-          </Stack>
-        </Container>
-      </Flex>
-    );
+    return <Loading isLoading={isLoading} />;
   }
   return (
     <>
@@ -133,7 +113,12 @@ const PokemonGrid = () => {
             </>
             {Object.keys(singlePokemon).length === 0 ? (
               <>
-                <SimpleGrid mt="10" spacing="5" columns={{ base: 1, md: 5 }}>
+                <SimpleGrid
+                  mt="10"
+                  spacing="5"
+                  columns={{ base: 1, md: 5 }}
+                  w={{ base: "60%", md: "100%" }}
+                >
                   {pokemon.map((pokemon) => (
                     <Box
                       as="button"
@@ -156,8 +141,11 @@ const PokemonGrid = () => {
                 key={singlePokemon.id}
                 onClick={() => handleViewPokemon(singlePokemon)}
                 className={styles.singleCard}
+                columns={{ base: 1, md: 5 }}
+                w={{ base: "60%", md: "100%" }}
+                mt={10}
               >
-                <PokemonCard pokemon={singlePokemon} />
+                <PokemonCard pokemon={singlePokemon} fromCatched={false} />
               </Box>
             )}
           </Stack>

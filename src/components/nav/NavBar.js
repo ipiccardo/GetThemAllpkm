@@ -1,6 +1,5 @@
 import React from "react";
-import { AbsoluteCenter, Box, Flex, Spacer } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box } from "@chakra-ui/react";
 import NavLinks from "./NavLinks";
 
 export default function NavBar() {
@@ -10,9 +9,10 @@ export default function NavBar() {
       w="100%"
       p={4}
       color="white"
-      position={"absolute"}
+      position={"relative"}
       right={0}
       left={0}
+      top={0}
     >
       <NavLinks />
     </Box>
