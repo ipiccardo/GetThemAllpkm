@@ -24,7 +24,7 @@ import {
 import PokemonCard from "@/components/pokemonsRender/PokemonCard";
 import PokemonData from "@/components/pokemonsRender/PokemonData";
 import MyLoader from "@/components/loader/MyLoader";
-import CustomPagination from "../pagination/Pagination";
+import CustomPagination from "../Pagination/Pagination";
 import SearchBar from "../searchBar/SearchBar";
 import PokemonCatchedCard from "../catched/cards/PokemonCatchedCard";
 import LoadingDashboard from "../loader/LoadingDashboard";

@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import SearchBar from "../searchBar/SearchBar";
 import MyLoader from "./MyLoader";
-import CustomPagination from "../pagination/Pagination";
+import CustomPagination from "../Pagination/Pagination";
 import CustomSkeleton from "./SkeletonsResponsive";
 
 const LoadingDashboard = () => {
