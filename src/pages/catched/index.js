@@ -5,6 +5,7 @@ import axios from "axios";
 import { Skeleton, useMediaQuery } from "@chakra-ui/react";
 import CatchedTable from "../../components/catched/table/Table";
 import Cards from "@/components/catched/cards/Cards";
+import ErrorBoundary from "@/components/errorHandler/ErrorBoundary";
 
 const Page = ({ initialData }) => {
   const [listCatched, setListCatched] = useState();
@@ -29,9 +30,11 @@ const Page = ({ initialData }) => {
     return (
       <>
         {
-          <Skeleton isLoaded={!isLoading}>
-            <Cards listCatched={listCatched} />
-          </Skeleton>
+          <ErrorBoundary>
+            <Skeleton isLoaded={!isLoading}>
+              <Cards listCatched={listCatched} />
+            </Skeleton>
+          </ErrorBoundary>
         }
       </>
     );
@@ -40,9 +43,11 @@ const Page = ({ initialData }) => {
   return (
     <>
       {
-        <Skeleton isLoaded={!isLoading}>
-          <CatchedTable listCatched={listCatched} />
-        </Skeleton>
+        <ErrorBoundary>
+          <Skeleton isLoaded={!isLoading}>
+            <CatchedTable listCatched={listCatched} />
+          </Skeleton>
+        </ErrorBoundary>
       }
     </>
   );
@@ -50,7 +55,7 @@ const Page = ({ initialData }) => {
 
 export async function getServerSideProps() {
   try {
-    const response = await axios.get(`api/catched/`);
+    const response = await axios.get(`/api/catched/`);
     const initialData = response.data;
     return { props: { initialData } };
   } catch (error) {

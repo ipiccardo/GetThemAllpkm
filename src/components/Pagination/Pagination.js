@@ -6,12 +6,16 @@ const CustomPagination = ({ setPage, page, pageCount }) => {
 
   const handleChange = (newPage) => {
     setPage(newPage);
+    // Desplazar hacia arriba al cambiar de página
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleGoToPage = () => {
     const pageNumber = parseInt(inputPage, 10);
     if (pageNumber >= 1 && pageNumber <= pageCount) {
       setPage(pageNumber - 1);
+      // Desplazar hacia arriba al cambiar de página
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
     setInputPage("");
   };

@@ -28,18 +28,20 @@ const CatchedTable = ({ listCatched }) => {
     setIsLoading(false);
   }, [listCatched]);
 
-  if (!listCatched?.length && !isLoading) {
-    return (
-      <>
-        <Flex alignItems="center" minH="100vh" justifyContent="center">
-          <Container maxW="container.lg">
-            <div className={style.withOutPkms}>
-              <h1>Aún no has capturado ningún pokemon</h1>
-            </div>
-          </Container>
-        </Flex>
-      </>
-    );
+  if (listCatched) {
+    if (!listCatched?.length && !isLoading) {
+      return (
+        <>
+          <Flex alignItems="center" minH="100vh" justifyContent="center">
+            <Container maxW="container.lg">
+              <div className={style.withOutPkms}>
+                <h1>Aún no has capturado ningún pokemon</h1>
+              </div>
+            </Container>
+          </Flex>
+        </>
+      );
+    }
   }
 
   return (
@@ -57,7 +59,7 @@ const CatchedTable = ({ listCatched }) => {
             <Box textColor={"rgb(101, 67, 33)"}>My Team</Box>
           </Heading>
           <Box textColor={"rgb(101, 67, 33)"}>
-            Total atrapados: {listCatched.length}
+            Total atrapados: {listCatched?.length}
           </Box>
           <TableContainer width={`100%`} mt={10}>
             <Table variant="simple">

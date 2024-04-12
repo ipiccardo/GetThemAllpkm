@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Badge, Image, HStack } from "@chakra-ui/react";
+import { Box, Flex, Badge, Image, HStack, AspectRatio } from "@chakra-ui/react";
 import { colorTipos } from "../../../utils/colorTypes";
 
 const PokemonCatchedCard = ({ pokemon, fromCatched }) => {
