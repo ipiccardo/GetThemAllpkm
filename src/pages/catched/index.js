@@ -53,15 +53,15 @@ const Page = ({ initialData }) => {
   );
 };
 
-export async function getServerSideProps() {
-  try {
-    const response = await axios.get(`/api/catched/`);
-    const initialData = response.data;
-    return { props: { initialData } };
-  } catch (error) {
-    // console.error("Error fetching initial data:", error);
-    return { props: { initialData: [] } };
-  }
-}
+// export async function getServerSideProps() {
+//   try {
+//     const response = await axios.get(`/api/catched/`);
+//     const initialData = response.data;
+//     return { props: { initialData } };
+//   } catch (error) {
+//     // console.error("Error fetching initial data:", error);
+//     return { props: { initialData: [] } };
+//   }
+// }
 
-export default Page;
+// export default Page;
