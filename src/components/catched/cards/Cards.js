@@ -14,7 +14,7 @@ const CatchedCards = ({ listCatched }) => {
   if (!listCatched?.length) {
     return (
       <Flex alignItems="center" minH="100vh" justifyContent="center">
-        <Container maxW="container.lg">
+        <Container maxW="container.lg" mt={100}>
           <Heading as="h1" size="lg" textAlign="center">
             Aún no has capturado ningún Pokemon
           </Heading>
@@ -24,7 +24,7 @@ const CatchedCards = ({ listCatched }) => {
   }
 
   return (
-    <Container maxW="container.lg" mt={10}>
+    <Container maxW="container.lg" mt={100}>
       <Heading
         as="h1"
         size="lg"

@@ -9,7 +9,7 @@ export default function NavBar() {
       w="100%"
       p={4}
       color="white"
-      position={"relative"}
+      position={"absolute"}
       right={0}
       left={0}
       top={0}
