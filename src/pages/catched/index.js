@@ -7,7 +7,7 @@ import CatchedTable from "../../components/catched/table/Table";
 import Cards from "@/components/catched/cards/Cards";
 import ErrorBoundary from "@/components/errorHandler/ErrorBoundary";
 
-const Page = ({ initialData }) => {
+const Page = () => {
   const [listCatched, setListCatched] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isSmallScreen] = useMediaQuery("(max-width: 766px)");
@@ -64,4 +64,4 @@ const Page = ({ initialData }) => {
 //   }
 // }
 
-// export default Page;
+export default Page;
