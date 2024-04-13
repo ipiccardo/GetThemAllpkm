@@ -5,7 +5,9 @@ export default async function handler(req, res) {
 
   try {
     const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
+      `https://pokeapi.co/api/v2/pokemon/${name
+        .toLowerCase()
+        .replace(/\s+/g, "-")}`
     );
     const pokemon = response.data;
     res.status(200).json(pokemon);
