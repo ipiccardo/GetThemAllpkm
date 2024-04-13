@@ -1,7 +1,7 @@
 import { Skeleton } from "@chakra-ui/react";
 import { useBreakpointValue } from "@chakra-ui/react";
 
-const CustomSkeleton = ({ fromCards }) => {
+const CustomSkeleton = () => {
   const skeletonWidth = useBreakpointValue({
     base: "100%",
     sm: "384px",
@@ -9,10 +9,10 @@ const CustomSkeleton = ({ fromCards }) => {
     lg: "384px",
   });
   const skeletonHeight = useBreakpointValue({
-    base: fromCards ? "524px" : "100px",
-    sm: fromCards ? "524px" : "200px",
-    md: fromCards ? "524px" : "300px",
-    lg: fromCards ? "524px" : "400px",
+    base: "100px",
+    sm: "200px",
+    md: "300px",
+    lg: "400px",
   });
 
   return <Skeleton width={skeletonWidth} height={skeletonHeight} />;
