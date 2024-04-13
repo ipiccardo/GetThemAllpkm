@@ -59,7 +59,7 @@ export async function getServerSideProps() {
     const initialData = response.data;
     return { props: { initialData } };
   } catch (error) {
-    console.error("Error fetching initial data:", error);
+    // console.error("Error fetching initial data:", error);
     return { props: { initialData: [] } };
   }
 }

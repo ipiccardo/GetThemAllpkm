@@ -54,6 +54,17 @@ const SearchBar = ({ setSinglePokemon, singlePokemon, setIsLoading }) => {
   return (
     <>
       <div className={styles.container}>
+        {singlePokemon && Object.keys(singlePokemon).length !== 0 && (
+          <button
+            className={styles.backButton}
+            onClick={() => {
+              setSinglePokemon({});
+              setSearchValue("");
+            }}
+          >
+            all
+          </button>
+        )}
         <input
           type="text"
           value={searchValue}

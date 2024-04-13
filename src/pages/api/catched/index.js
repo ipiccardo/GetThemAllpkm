@@ -1,29 +1,38 @@
-import { JsonDB, Config } from "node-json-db";
+import { sql } from "@vercel/postgres";
 
 export default async function handler(req, res) {
-  const db = new JsonDB(new Config("db", true, false, "/"));
   if (req.method === "GET") {
-    var data = await db.getData("/catchedPokemon");
-
-    return res.status(200).json(data);
+    try {
+      const data = await sql`SELECT * FROM catched_pokemon`;
+      return res.status(200).json(data.rows);
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
   } else if (req.method === "POST") {
     const newPokemon = {
       id: req.body.id,
       name: req.body.name,
       image: req.body.image,
-      types: req.body.types,
+      types: JSON.stringify(req.body.types),
     };
 
-    const existingPokemon = await db.getData("/catchedPokemon");
-    const index = existingPokemon.findIndex(
-      (pokemon) => pokemon.id === newPokemon.id
-    );
+    try {
+      const existingPokemon =
+        await sql`SELECT * FROM catched_pokemon WHERE id = ${newPokemon.id}`;
 
-    if (index === -1) {
-      await db.push("/catchedPokemon[]", newPokemon);
-      return res.status(200).json(newPokemon);
-    } else {
-      return res.status(409).send("Pokemon ya existente");
+      if (existingPokemon.rows.length === 0) {
+        await sql`
+          INSERT INTO catched_pokemon (id, name, image, types)
+          VALUES (${newPokemon.id}, ${newPokemon.name}, ${newPokemon.image}, ${newPokemon.types})
+        `;
+        return res.status(200).json(newPokemon);
+      } else {
+        return res.status(409).send("Pokemon ya existente");
+      }
+    } catch (error) {
+      console.error("Error al procesar la solicitud:", error);
+      return res.status(500).json({ error: "Error interno del servidor" });
     }
   }
   return res.status(405).send("Method not allowed.");

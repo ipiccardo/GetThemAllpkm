@@ -22,16 +22,27 @@
   border-radius: 5px;
 }
 
-.button:hover {
+.backButton {
+  background-color: burlywood;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.button:hover,
+.backButton:hover {
   background-color: #deb887;
 }
 
-.button:active {
+.button:active,
+.backButton:active {
   background-color: #8b7355;
 }
-
 .error {
-  color: red;
+  color: rgb(72, 3, 3);
   font-weight: bold;
 }
 

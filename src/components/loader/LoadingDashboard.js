@@ -25,19 +25,11 @@ const LoadingDashboard = () => {
             spacing="5"
             columns={isLargerThan766 ? { base: 1, md: 5 } : 1}
           >
-            {isLargerThan766 ? (
-              Array.from({ length: 20 }).map((_, index) => (
-                <div key={new Date().getTime() + index}>
-                  <MyLoader />
-                </div>
-              ))
-            ) : (
-              <>
-                <CustomSkeleton />
-                <CustomSkeleton />
-                <CustomSkeleton />
-              </>
-            )}
+            {Array.from({ length: 20 }).map((_, index) => (
+              <div key={new Date().getTime() + index}>
+                <MyLoader />
+              </div>
+            ))}
           </SimpleGrid>
           <CustomPagination />
         </Stack>

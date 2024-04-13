@@ -1,15 +1,13 @@
-import { JsonDB, Config } from "node-json-db";
+import { sql } from "@vercel/postgres";
 
 export default async function handler(req, res) {
-  const db = new JsonDB(new Config("db", true, false, "/"));
-
   if (req.method === "GET") {
     try {
       const query = req.query;
       const { pokemonId } = query;
-      const data = await db.getData("/catchedPokemon");
+      const data = await sql`SELECT * FROM catched_pokemon`;
 
-      const isPokemonCatched = data?.some(
+      const isPokemonCatched = data.rows.some(
         (pokemon) => pokemon.id === Number(pokemonId)
       );
 
@@ -22,11 +20,7 @@ export default async function handler(req, res) {
     try {
       const { pokemonId } = req.query;
 
-      await db.delete(
-        "/catchedPokemon[" +
-          (await db.getIndex("/catchedPokemon", Number(pokemonId))) +
-          "]"
-      );
+      await sql`DELETE FROM catched_pokemon WHERE id = ${pokemonId}`;
 
       return res.status(200).send("Pokemon liberado");
     } catch (error) {

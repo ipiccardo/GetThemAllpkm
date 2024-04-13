@@ -20,17 +20,17 @@ import {
   ModalCloseButton,
   useDisclosure,
   Skeleton,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import PokemonCard from "@/components/pokemonsRender/PokemonCard";
 import PokemonData from "@/components/pokemonsRender/PokemonData";
-import MyLoader from "@/components/loader/MyLoader";
 import CustomPagination from "../Pagination/Pagination";
 import SearchBar from "../searchBar/SearchBar";
-import PokemonCatchedCard from "../catched/cards/PokemonCatchedCard";
 import LoadingDashboard from "../loader/LoadingDashboard";
 
 const PokemonGrid = () => {
   const pokemonDataModal = useDisclosure();
+  const [isLargerThan766] = useMediaQuery("(min-width: 766px)");
   const [page, setPage] = useState(0);
   const pageCount = 58;
 
@@ -63,7 +63,7 @@ const PokemonGrid = () => {
   }, [page]);
 
   function handleViewPokemon(pokemon) {
-    if (catchedPkm.some((pkm) => pkm.id === pokemon.id)) {
+    if (catchedPkm.some((pkm) => pkm.id.toString() === pokemon.id.toString())) {
       setIsCatched(true);
     } else {
       setIsCatched(false);
@@ -96,61 +96,70 @@ const PokemonGrid = () => {
       });
   }
 
-  if (isLoading) {
+  if (isLoading && isLargerThan766) {
     return <LoadingDashboard />;
   }
+
   return (
     <>
-      <Flex alignItems="center" minH="100vh" justifyContent="center">
-        <Container p="10" maxW="container.lg">
-          <Stack pt="5" alignItems="center" spacing="5">
-            <>
-              <SearchBar
-                setSinglePokemon={setSinglePokemon}
-                singlePokemon={singlePokemon}
-                setIsLoading={setIsLoading}
-              />
-            </>
-            {Object.keys(singlePokemon).length === 0 ? (
+      <Skeleton isLoaded={!isLoading}>
+        <Flex alignItems="center" minH="100vh" justifyContent="center">
+          <Container p="10" maxW="container.lg">
+            <Stack pt="5" alignItems="center" spacing="5">
               <>
-                <SimpleGrid
-                  mt="10"
-                  spacing="5"
-                  columns={{ base: 1, md: 5 }}
-                  w={{ base: "60%", md: "100%" }}
-                >
-                  {pokemon.map((pokemon) => (
-                    <Box
-                      as="button"
-                      key={pokemon.id}
-                      onClick={() => handleViewPokemon(pokemon)}
-                    >
-                      <PokemonCard pokemon={pokemon} />
-                    </Box>
-                  ))}
-                </SimpleGrid>
-                <CustomPagination
-                  setPage={setPage}
-                  page={page}
-                  pageCount={pageCount}
+                <SearchBar
+                  setSinglePokemon={setSinglePokemon}
+                  singlePokemon={singlePokemon}
+                  setIsLoading={setIsLoading}
                 />
               </>
-            ) : (
-              <Box
-                as="button"
-                key={singlePokemon.id}
-                onClick={() => handleViewPokemon(singlePokemon)}
-                className={styles.singleCard}
-                columns={{ base: 1, md: 5 }}
-                w={{ base: "60%", md: "100%" }}
-                mt={10}
-              >
-                <PokemonCard pokemon={singlePokemon} fromCatched={false} />
-              </Box>
-            )}
-          </Stack>
-        </Container>
-      </Flex>
+              {Object.keys(singlePokemon).length === 0 ? (
+                <>
+                  <SimpleGrid
+                    mt="10"
+                    spacing="5"
+                    columns={{ base: 1, md: 5 }}
+                    w={{ base: "60%", md: "100%" }}
+                  >
+                    {pokemon.map((pokemon) => (
+                      <Box
+                        as="button"
+                        key={pokemon.id}
+                        onClick={() => handleViewPokemon(pokemon)}
+                      >
+                        {!isLargerThan766 ? (
+                          <Skeleton isLoaded={!isLoading}>
+                            <PokemonCard pokemon={pokemon} />
+                          </Skeleton>
+                        ) : (
+                          <PokemonCard pokemon={pokemon} />
+                        )}
+                      </Box>
+                    ))}
+                  </SimpleGrid>
+                  <CustomPagination
+                    setPage={setPage}
+                    page={page}
+                    pageCount={pageCount}
+                  />
+                </>
+              ) : (
+                <Box
+                  as="button"
+                  key={singlePokemon.id}
+                  onClick={() => handleViewPokemon(singlePokemon)}
+                  className={styles.singleCard}
+                  columns={{ base: 1, md: 5 }}
+                  w={{ base: "60%", md: "100%" }}
+                  mt={10}
+                >
+                  <PokemonCard pokemon={singlePokemon} fromCatched={false} />
+                </Box>
+              )}
+            </Stack>
+          </Container>
+        </Flex>
+      </Skeleton>
       <Modal {...pokemonDataModal} size={{ base: "lg", xm: "full" }}>
         <ModalOverlay />
         <ModalContent>
