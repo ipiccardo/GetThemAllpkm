@@ -2,19 +2,25 @@ import React, { useState, useEffect } from "react";
 import styles from "./searchBar.module.css";
 import axios from "axios";
 
-const SearchBar = ({ setSinglePokemon, singlePokemon, setIsLoading }) => {
+const SearchBar = ({
+  setSinglePokemon,
+  singlePokemon,
+  setIsLoading,
+  errorMessage,
+  setErrorMessage,
+}) => {
   const [searchValue, setSearchValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   function handleSearch() {
-    setIsLoading(true);
+    if (searchValue !== "" && Object.keys(singlePokemon).length === 0) {
+      setIsLoading(true);
+    }
     if (searchValue === "") {
       setIsLoading(false);
       setSinglePokemon({});
       Object.keys(singlePokemon).length === 0
         ? setErrorMessage("Escribí el nombre del pokemon buscado")
         : setErrorMessage("");
-      return;
     }
     axios
       .get(`api/getByName/?name=${searchValue}`)
@@ -30,15 +36,18 @@ const SearchBar = ({ setSinglePokemon, singlePokemon, setIsLoading }) => {
         if (error.response.status === 404) {
           setSinglePokemon({});
           setErrorMessage("El Pokémon buscado no existe");
+          setIsLoading(false);
         } else {
           console.error("Error al llamar a la API:", error);
           setSinglePokemon({});
           setErrorMessage("error");
+          setIsLoading(false);
         }
-      }, setIsLoading(false));
+      });
   }
 
   const handleCleanInput = () => {
+    setErrorMessage("");
     if (errorMessage !== "" && searchValue !== "") {
       setErrorMessage("");
       setSearchValue("");
