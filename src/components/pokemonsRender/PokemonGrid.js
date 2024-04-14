@@ -101,9 +101,47 @@ const PokemonGrid = () => {
     return <LoadingDashboard />;
   }
 
+  if (isLoading && !isLargerThan766) {
+    return (
+      <>
+        <Flex alignItems="center" minH="100vh" justifyContent="center">
+          <Container p="10" maxW="container.lg" position={"absolute"} top={0}>
+            <Stack pt="5" alignItems="center" spacing="5">
+              <>
+                <SearchBar
+                  setSinglePokemon={setSinglePokemon}
+                  singlePokemon={singlePokemon}
+                  setIsLoading={setIsLoading}
+                  setErrorMessage={setErrorMessage}
+                  errorMessage={errorMessage}
+                />
+                <Stack
+                  spacing="5"
+                  p="5"
+                  w="full"
+                  borderRadius="xl"
+                  alignItems="center"
+                >
+                  <Skeleton width={"100%"} height={449} border={20} />
+                  <Skeleton width={"100%"} height={449} border={20} />
+                  <Skeleton width={"100%"} height={449} border={20} />
+                </Stack>
+
+                <CustomPagination
+                  setPage={setPage}
+                  page={page}
+                  pageCount={pageCount}
+                />
+              </>
+            </Stack>
+          </Container>
+        </Flex>
+      </>
+    );
+  }
+
   return (
     <>
-      {/* <Skeleton isLoaded={!isLoading}> */}
       <Flex alignItems="center" minH="100vh" justifyContent="center">
         <Container p="10" maxW="container.lg" position={"absolute"} top={0}>
           <Stack pt="5" alignItems="center" spacing="5">
@@ -130,13 +168,7 @@ const PokemonGrid = () => {
                       key={pokemon.id}
                       onClick={() => handleViewPokemon(pokemon)}
                     >
-                      {!isLargerThan766 ? (
-                        // <Skeleton isLoaded={!isLoading}>
-                        <PokemonCard pokemon={pokemon} />
-                      ) : (
-                        // </Skeleton>
-                        <PokemonCard pokemon={pokemon} />
-                      )}
+                      <PokemonCard pokemon={pokemon} />
                     </Box>
                   ))}
                 </SimpleGrid>
@@ -162,7 +194,6 @@ const PokemonGrid = () => {
           </Stack>
         </Container>
       </Flex>
-      {/* </Skeleton> */}
       <Modal {...pokemonDataModal} size={{ base: "lg", xm: "full" }}>
         <ModalOverlay />
         <ModalContent>

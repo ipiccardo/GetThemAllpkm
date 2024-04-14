@@ -52,14 +52,27 @@ const CatchedTable = ({ listCatched }) => {
       <Container maxW="container.lg" mt={10}>
         <div className={style.tableContainer}>
           {isLoading ? (
-            <Flex gap={10} direction={"column"} mt={50}>
-              <Skeleton width={"100%"} height={50} border={20} />
-              <Skeleton width={"100%"} height={100} border={20} />
-              <Skeleton width={"100%"} height={100} border={20} />
-              <Skeleton width={"100%"} height={100} border={20} />
-              <Skeleton width={"100%"} height={100} border={20} />
-              <Skeleton width={"100%"} height={100} border={20} />
-            </Flex>
+            <>
+              <Heading
+                as="h1"
+                size="lg"
+                mb={6}
+                textAlign="center"
+                borderBottom="1px solid burlywood"
+                pb={2}
+                mt={50}
+              >
+                <Box textColor={"rgb(101, 67, 33)"}>My Team</Box>
+              </Heading>
+              <Flex gap={10} direction={"column"} mt={50}>
+                <Skeleton width={"100%"} height={100} border={20} />
+                <Skeleton width={"100%"} height={100} border={20} />
+                <Skeleton width={"100%"} height={100} border={20} />
+                <Skeleton width={"100%"} height={100} border={20} />
+                <Skeleton width={"100%"} height={100} border={20} />
+                <Skeleton width={"100%"} height={100} border={20} />
+              </Flex>
+            </>
           ) : (
             <>
               <Heading

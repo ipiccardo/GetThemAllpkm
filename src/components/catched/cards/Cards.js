@@ -51,9 +51,16 @@ const CatchedCards = ({ listCatched }) => {
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="40px">
         {isLoading ? (
           <>
-            <Skeleton width={363} height={449} border={20} />
-            <Skeleton width={363} height={449} border={20} />
-            <Skeleton width={363} height={449} border={20} />
+            <Box
+              flex={"flex"}
+              justifyContent={"center"}
+              flexDirection={"column"}
+              gap={"1rem"}
+            >
+              <Skeleton width={363} height={449} border={20} />
+              <Skeleton width={363} height={449} border={20} />
+              <Skeleton width={363} height={449} border={20} />
+            </Box>
           </>
         ) : (
           listCatched.map((pokemon) => (
