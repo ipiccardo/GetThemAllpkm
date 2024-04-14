@@ -13,12 +13,15 @@ const SearchBar = ({
   const [searchValue, setSearchValue] = useState("");
 
   function handleSearch() {
+    if (searchValue !== "" && Object.keys(singlePokemon).length === 0) {
+      setIsLoading(true);
+    }
     if (searchValue === "") {
       setIsLoading(false);
+      setSinglePokemon({});
       Object.keys(singlePokemon).length === 0
         ? setErrorMessage("Escribí el nombre del pokemon buscado")
         : setErrorMessage("");
-      setSinglePokemon({});
       return;
     }
     axios
