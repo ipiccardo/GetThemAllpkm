@@ -3,9 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Skeleton, useMediaQuery } from "@chakra-ui/react";
-import CatchedTable from "../../components/catched/table/Table";
-import Cards from "@/components/catched/cards/Cards";
-import ErrorBoundary from "@/components/errorHandler/ErrorBoundary";
+import Catched from "../../components/catched/Catched";
+import CatchedResponsive from "@/components/catched/CatchedResponsive";
 
 const Page = () => {
   const [listCatched, setListCatched] = useState();
@@ -27,22 +26,10 @@ const Page = () => {
   }, []);
 
   if (isSmallScreen) {
-    return (
-      <>
-        {<ErrorBoundary>{<Cards listCatched={listCatched} />}</ErrorBoundary>}
-      </>
-    );
+    return <>{<CatchedResponsive listCatched={listCatched} />}</>;
   }
 
-  return (
-    <>
-      {
-        <ErrorBoundary>
-          <CatchedTable listCatched={listCatched} />
-        </ErrorBoundary>
-      }
-    </>
-  );
+  return <>{<Catched listCatched={listCatched} />}</>;
 };
 
 export default Page;

@@ -8,7 +8,6 @@ import {
 import SearchBar from "../searchBar/SearchBar";
 import MyLoader from "./MyLoader";
 import CustomPagination from "../Pagination/Pagination";
-import CustomSkeleton from "./SkeletonsResponsive";
 
 const LoadingDashboard = () => {
   const [isLargerThan766] = useMediaQuery("(min-width: 766px)");
