@@ -64,6 +64,9 @@ const CatchedTable = ({ listCatched }) => {
               >
                 <Box textColor={"rgb(101, 67, 33)"}>My Team</Box>
               </Heading>
+              <Box textColor={"rgb(101, 67, 33)"}>
+                Total atrapados: {listCatched?.length}
+              </Box>
               <Flex gap={10} direction={"column"} mt={50}>
                 <Skeleton width={"100%"} height={100} border={20} />
                 <Skeleton width={"100%"} height={100} border={20} />
