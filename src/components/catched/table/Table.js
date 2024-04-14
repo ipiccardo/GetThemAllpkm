@@ -47,7 +47,7 @@ const CatchedTable = ({ listCatched }) => {
         <Skeleton
           isLoaded={!loading}
           endColor={"var(--chakra-colors-gray-200)"}
-          minH={"100vh"}
+          minH={"500"}
         >
           <Box textColor={"rgb(101, 67, 33)"}>
             Catched: {listCatched?.length}
