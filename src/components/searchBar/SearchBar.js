@@ -51,7 +51,7 @@ const SearchBar = ({
     if (errorMessage !== "" && searchValue !== "") {
       setErrorMessage("");
       setSearchValue("");
-      setSinglePokemon("");
+      setSinglePokemon({});
     }
   };
 
@@ -77,7 +77,9 @@ const SearchBar = ({
         <input
           type="text"
           value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => {
+            setSearchValue(e.target.value), setSinglePokemon({});
+          }}
           className={styles.input}
           placeholder="Search..."
           onInput={handleCleanInput}

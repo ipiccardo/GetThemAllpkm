@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useMediaQuery } from "@chakra-ui/react";
 import styles from "./pagination.module.css";
 
 const CustomPagination = ({ setPage, page, pageCount }) => {
   const [inputPage, setInputPage] = useState("");
+  const [isLargerThan766] = useMediaQuery("(min-width: 766px)");
 
   const handleChange = (newPage) => {
     setPage(newPage);
@@ -35,6 +37,27 @@ const CustomPagination = ({ setPage, page, pageCount }) => {
 
     return pages;
   };
+
+  if (!isLargerThan766) {
+    return (
+      <div className={styles.container}>
+        <button
+          className={styles.button}
+          disabled={page === 0}
+          onClick={() => handleChange(page - 1)}
+        >
+          Previous
+        </button>
+        <button
+          className={styles.button}
+          disabled={page === pageCount - 1}
+          onClick={() => handleChange(page + 1)}
+        >
+          Next
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
