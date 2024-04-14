@@ -31,7 +31,7 @@ const CatchedCards = ({ listCatched }) => {
       <Skeleton
         isLoaded={!loading}
         endColor={"var(--chakra-colors-gray-200)"}
-        height={"80vh"}
+        minH={"300px"}
       >
         <Box textColor={"rgb(101, 67, 33)"}>Catched: {listCatched?.length}</Box>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="40px">

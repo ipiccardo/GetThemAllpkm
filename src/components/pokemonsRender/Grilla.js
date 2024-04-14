@@ -65,7 +65,7 @@ const Grilla = ({ pokemon, handleViewPokemon, isLoading }) => {
   return (
     <>
       <SimpleGrid
-        mt="10"
+        mt="5"
         spacing="5"
         columns={{ base: 1, md: 5 }}
         w={{ base: "60%", md: "100%" }}

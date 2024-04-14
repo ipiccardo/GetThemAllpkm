@@ -99,66 +99,73 @@ const PokemonGrid = () => {
       });
   }
 
-  return (
-    <>
-      <Flex alignItems="center" minH="100vh" justifyContent="center">
-        <Container p="10" maxW="container.lg" position={"absolute"} top={0}>
-          <Stack pt="5" alignItems="center" spacing="5">
-            <>
-              <SearchBar
-                setSinglePokemon={setSinglePokemon}
-                singlePokemon={singlePokemon}
-                setIsLoading={setIsLoading}
-                setErrorMessage={setErrorMessage}
-                errorMessage={errorMessage}
-              />
-            </>
-            {Object.keys(singlePokemon).length === 0 ? (
-              <>
-                <Grilla
-                  pokemon={pokemon}
-                  handleViewPokemon={handleViewPokemon}
-                  isLoading={isLoading}
-                />
-                <CustomPagination
-                  setPage={setPage}
-                  page={page}
-                  pageCount={pageCount}
-                />
-                <PokemonModal
-                  isOpen={pokemonDataModal.isOpen}
-                  onClose={pokemonDataModal.onClose}
-                  selectedPokemon={selectedPokemon}
-                  isCatched={isCatched}
-                  onUpdateCatched={handleUpdateCatched}
-                />
-              </>
-            ) : (
-              <>
-                <Box
-                  as="button"
-                  key={singlePokemon.id}
-                  onClick={() => handleViewPokemon(singlePokemon)}
-                  className={styles.singleCard}
-                  columns={{ base: 1, md: 5 }}
-                  w={{ base: "60%", md: "100%" }}
-                  mt={10}
-                >
-                  <PokemonCard pokemon={singlePokemon} fromCatched={false} />
-                </Box>
-              </>
-            )}
-          </Stack>
-        </Container>
-      </Flex>
-      <PokemonModal
-        isOpen={pokemonDataModal.isOpen}
-        onClose={pokemonDataModal.onClose}
-        selectedPokemon={selectedPokemon}
-        isCatched={isCatched}
-        onUpdateCatched={handleUpdateCatched}
-      />
-    </>
+  return Object.keys(singlePokemon).length === 0 ? (
+    <Flex alignItems="center" minH="100vh" justifyContent="center">
+      <Container p="10" maxW="container.lg">
+        <Stack pt="5" alignItems="center" spacing="5">
+          <SearchBar
+            setSinglePokemon={setSinglePokemon}
+            singlePokemon={singlePokemon}
+            setIsLoading={setIsLoading}
+            setErrorMessage={setErrorMessage}
+            errorMessage={errorMessage}
+          />
+          <Grilla
+            pokemon={pokemon}
+            handleViewPokemon={handleViewPokemon}
+            isLoading={isLoading}
+          />
+          <CustomPagination
+            setPage={setPage}
+            page={page}
+            pageCount={pageCount}
+          />
+          <PokemonModal
+            isOpen={pokemonDataModal.isOpen}
+            onClose={pokemonDataModal.onClose}
+            selectedPokemon={selectedPokemon}
+            isCatched={isCatched}
+            onUpdateCatched={handleUpdateCatched}
+          />
+        </Stack>
+      </Container>
+    </Flex>
+  ) : (
+    // <Flex alignItems="center" minH="100vh" justifyContent="center">
+    <Container p="10" maxW="container.lg">
+      <Stack pt="5" alignItems="center" spacing="5">
+        <SearchBar
+          setSinglePokemon={setSinglePokemon}
+          singlePokemon={singlePokemon}
+          setIsLoading={setIsLoading}
+          setErrorMessage={setErrorMessage}
+          errorMessage={errorMessage}
+        />
+        <Box
+          as="button"
+          key={singlePokemon.id}
+          onClick={() => handleViewPokemon(singlePokemon)}
+          className={styles.singleCard}
+          columns={{ base: 1, md: 5 }}
+          w={{ base: "60%", md: "100%" }}
+          mt={10}
+        >
+          <PokemonCard
+            pokemon={singlePokemon}
+            fromCatched={false}
+            singlePokemon={singlePokemon}
+          />
+        </Box>
+        <PokemonModal
+          isOpen={pokemonDataModal.isOpen}
+          onClose={pokemonDataModal.onClose}
+          selectedPokemon={selectedPokemon}
+          isCatched={isCatched}
+          onUpdateCatched={handleUpdateCatched}
+        />
+      </Stack>
+    </Container>
+    // </Flex>
   );
 };
 
