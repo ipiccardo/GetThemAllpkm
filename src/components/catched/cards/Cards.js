@@ -1,26 +1,21 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
-  Flex,
   Heading,
-  Badge,
-  Image,
   SimpleGrid,
   Container,
   Skeleton,
 } from "@chakra-ui/react";
 import PokemonCatchedCard from "./PokemonCatchedCard";
-import { useState, useEffect } from "react";
 
 const CatchedCards = ({ listCatched }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (listCatched) {
-      setIsLoading(false);
+      setLoading(false);
     }
   }, [listCatched]);
-
   return (
     <Container maxW="container.lg" mt={100}>
       <Heading
@@ -33,18 +28,24 @@ const CatchedCards = ({ listCatched }) => {
       >
         <Box textColor={"rgb(101, 67, 33)"}>My Team</Box>
       </Heading>
-      <Box textColor={"rgb(101, 67, 33)"}>
-        Total atrapados: {listCatched?.length}
-      </Box>
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="40px">
-        {listCatched?.map((pokemon) => (
-          <PokemonCatchedCard
-            key={pokemon.id}
-            pokemon={pokemon}
-            fromCatched={true}
-          />
-        ))}
-      </SimpleGrid>
+      <Skeleton
+        isLoaded={!loading}
+        endColor={"var(--chakra-colors-gray-200)"}
+        height={"80vh"}
+      >
+        <Box textColor={"rgb(101, 67, 33)"}>
+          Total atrapados: {listCatched?.length}
+        </Box>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="40px">
+          {listCatched?.map((pokemon) => (
+            <PokemonCatchedCard
+              key={pokemon.id}
+              pokemon={pokemon}
+              fromCatched={true}
+            />
+          ))}
+        </SimpleGrid>
+      </Skeleton>
     </Container>
   );
 };
