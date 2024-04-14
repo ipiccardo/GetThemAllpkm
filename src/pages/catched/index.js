@@ -29,13 +29,7 @@ const Page = () => {
   if (isSmallScreen) {
     return (
       <>
-        {
-          <ErrorBoundary>
-            <Skeleton isLoaded={!isLoading}>
-              <Cards listCatched={listCatched} />
-            </Skeleton>
-          </ErrorBoundary>
-        }
+        {<ErrorBoundary>{<Cards listCatched={listCatched} />}</ErrorBoundary>}
       </>
     );
   }
@@ -44,9 +38,7 @@ const Page = () => {
     <>
       {
         <ErrorBoundary>
-          <Skeleton isLoaded={!isLoading}>
-            <CatchedTable listCatched={listCatched} />
-          </Skeleton>
+          <CatchedTable listCatched={listCatched} />
         </ErrorBoundary>
       }
     </>

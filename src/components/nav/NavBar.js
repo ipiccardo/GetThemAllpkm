@@ -13,6 +13,7 @@ export default function NavBar() {
       right={0}
       left={0}
       top={0}
+      zIndex={100}
     >
       <NavLinks />
     </Box>

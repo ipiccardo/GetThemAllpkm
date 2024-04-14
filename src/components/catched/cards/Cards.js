@@ -7,11 +7,21 @@ import {
   Image,
   SimpleGrid,
   Container,
+  Skeleton,
 } from "@chakra-ui/react";
 import PokemonCatchedCard from "./PokemonCatchedCard";
+import { useState, useEffect } from "react";
 
 const CatchedCards = ({ listCatched }) => {
-  if (!listCatched?.length) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (listCatched) {
+      setIsLoading(false);
+    }
+  }, [listCatched]);
+
+  if (listCatched && !listCatched?.length) {
     return (
       <Flex alignItems="center" minH="100vh" justifyContent="center">
         <Container maxW="container.lg" mt={100}>
@@ -39,13 +49,21 @@ const CatchedCards = ({ listCatched }) => {
         Total atrapados: {listCatched?.length}
       </Box>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="40px">
-        {listCatched.map((pokemon) => (
-          <PokemonCatchedCard
-            key={pokemon.id}
-            pokemon={pokemon}
-            fromCatched={true}
-          />
-        ))}
+        {isLoading ? (
+          <>
+            <Skeleton width={363} height={449} border={20} />
+            <Skeleton width={363} height={449} border={20} />
+            <Skeleton width={363} height={449} border={20} />
+          </>
+        ) : (
+          listCatched.map((pokemon) => (
+            <PokemonCatchedCard
+              key={pokemon.id}
+              pokemon={pokemon}
+              fromCatched={true}
+            />
+          ))
+        )}
       </SimpleGrid>
     </Container>
   );
