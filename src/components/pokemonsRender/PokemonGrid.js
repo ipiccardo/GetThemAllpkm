@@ -23,10 +23,12 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import PokemonCard from "@/components/pokemonsRender/PokemonCard";
-import PokemonData from "@/components/pokemonsRender/PokemonData";
+import PokemonData from "./PokemonData";
 import CustomPagination from "../Pagination/Pagination";
 import SearchBar from "../searchBar/SearchBar";
 import LoadingDashboard from "../loader/LoadingDashboard";
+import Grilla from "./Grilla";
+import PokemonModal from "./Modal";
 
 const PokemonGrid = () => {
   const pokemonDataModal = useDisclosure();
@@ -97,85 +99,6 @@ const PokemonGrid = () => {
       });
   }
 
-  if (isLoading && singlePokemon && Object.keys(singlePokemon).length !== 0) {
-    console.log("entro aca");
-    return (
-      <Flex alignItems="center" minH="100vh" justifyContent="center">
-        <Container p="10" maxW="container.lg" position={"absolute"} top={0}>
-          <Stack pt="5" alignItems="center" spacing="5">
-            <>
-              <SearchBar
-                setSinglePokemon={setSinglePokemon}
-                singlePokemon={singlePokemon}
-                setIsLoading={setIsLoading}
-                setErrorMessage={setErrorMessage}
-                errorMessage={errorMessage}
-              />
-              <Stack
-                spacing="5"
-                p="5"
-                w="full"
-                borderRadius="xl"
-                alignItems="center"
-              >
-                <Skeleton width={"100%"} height={449} border={20} />
-              </Stack>
-
-              <CustomPagination
-                setPage={setPage}
-                page={page}
-                pageCount={pageCount}
-              />
-            </>
-          </Stack>
-        </Container>
-      </Flex>
-    );
-  }
-
-  if (isLoading && isLargerThan766) {
-    return <LoadingDashboard />;
-  }
-
-  if (isLoading && !isLargerThan766) {
-    return (
-      <>
-        <Flex alignItems="center" minH="100vh" justifyContent="center">
-          <Container p="10" maxW="container.lg" position={"absolute"} top={0}>
-            <Stack pt="5" alignItems="center" spacing="5">
-              <>
-                <SearchBar
-                  setSinglePokemon={setSinglePokemon}
-                  singlePokemon={singlePokemon}
-                  setIsLoading={setIsLoading}
-                  setErrorMessage={setErrorMessage}
-                  errorMessage={errorMessage}
-                />
-                <Stack
-                  spacing="5"
-                  p="5"
-                  w="full"
-                  borderRadius="xl"
-                  alignItems="center"
-                >
-                  <Skeleton width={"100%"} height={449} border={20} />
-                  <Skeleton width={"100%"} height={449} border={20} />
-                  <Skeleton width={"100%"} height={449} border={20} />
-                </Stack>
-
-                <CustomPagination
-                  setPage={setPage}
-                  page={page}
-                  pageCount={pageCount}
-                />
-              </>
-            </Stack>
-          </Container>
-        </Flex>
-      </>
-    );
-  }
-
   return (
     <>
       <Flex alignItems="center" minH="100vh" justifyContent="center">
@@ -192,62 +115,49 @@ const PokemonGrid = () => {
             </>
             {Object.keys(singlePokemon).length === 0 ? (
               <>
-                <SimpleGrid
-                  mt="10"
-                  spacing="5"
-                  columns={{ base: 1, md: 5 }}
-                  w={{ base: "60%", md: "100%" }}
-                >
-                  {pokemon.map((pokemon) => (
-                    <Box
-                      as="button"
-                      key={pokemon.id}
-                      onClick={() => handleViewPokemon(pokemon)}
-                    >
-                      <PokemonCard pokemon={pokemon} />
-                    </Box>
-                  ))}
-                </SimpleGrid>
+                <Grilla
+                  pokemon={pokemon}
+                  handleViewPokemon={handleViewPokemon}
+                  isLoading={isLoading}
+                />
                 <CustomPagination
                   setPage={setPage}
                   page={page}
                   pageCount={pageCount}
                 />
+                <PokemonModal
+                  isOpen={pokemonDataModal.isOpen}
+                  onClose={pokemonDataModal.onClose}
+                  selectedPokemon={selectedPokemon}
+                  isCatched={isCatched}
+                  onUpdateCatched={handleUpdateCatched}
+                />
               </>
             ) : (
-              <Box
-                as="button"
-                key={singlePokemon.id}
-                onClick={() => handleViewPokemon(singlePokemon)}
-                className={styles.singleCard}
-                columns={{ base: 1, md: 5 }}
-                w={{ base: "60%", md: "100%" }}
-                mt={10}
-              >
-                <PokemonCard pokemon={singlePokemon} fromCatched={false} />
-              </Box>
+              <>
+                <Box
+                  as="button"
+                  key={singlePokemon.id}
+                  onClick={() => handleViewPokemon(singlePokemon)}
+                  className={styles.singleCard}
+                  columns={{ base: 1, md: 5 }}
+                  w={{ base: "60%", md: "100%" }}
+                  mt={10}
+                >
+                  <PokemonCard pokemon={singlePokemon} fromCatched={false} />
+                </Box>
+              </>
             )}
           </Stack>
         </Container>
       </Flex>
-      <Modal {...pokemonDataModal} size={{ base: "lg", xm: "full" }}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textTransform="capitalize">
-            {selectedPokemon?.name}
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {selectedPokemon && (
-              <PokemonData
-                pokemon={selectedPokemon}
-                isCatched={isCatched}
-                onUpdateCatched={handleUpdateCatched}
-              />
-            )}
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <PokemonModal
+        isOpen={pokemonDataModal.isOpen}
+        onClose={pokemonDataModal.onClose}
+        selectedPokemon={selectedPokemon}
+        isCatched={isCatched}
+        onUpdateCatched={handleUpdateCatched}
+      />
     </>
   );
 };

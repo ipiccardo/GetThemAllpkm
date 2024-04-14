@@ -5,6 +5,7 @@ import {
   HStack,
   Badge,
   AspectRatio,
+  Skeleton,
 } from "@chakra-ui/react";
 import { colorTipos } from "@/utils/colorTypes";
 
