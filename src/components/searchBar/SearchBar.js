@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./searchBar.module.css";
 import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 
 const SearchBar = ({
   setSinglePokemon,
@@ -12,15 +13,13 @@ const SearchBar = ({
   const [searchValue, setSearchValue] = useState("");
 
   function handleSearch() {
-    if (searchValue !== "" && Object.keys(singlePokemon).length === 0) {
-      setIsLoading(true);
-    }
     if (searchValue === "") {
       setIsLoading(false);
-      setSinglePokemon({});
       Object.keys(singlePokemon).length === 0
         ? setErrorMessage("Escribí el nombre del pokemon buscado")
         : setErrorMessage("");
+      setSinglePokemon({});
+      return;
     }
     axios
       .get(`api/getByName/?name=${searchValue}`)
@@ -86,7 +85,7 @@ const SearchBar = ({
           onFocus={handleFocus}
         />
         <button className={styles.button} onClick={handleSearch}>
-          Search
+          <FaSearch />
         </button>
       </div>
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
