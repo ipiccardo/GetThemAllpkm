@@ -17,7 +17,7 @@ const CatchedCards = ({ listCatched }) => {
     }
   }, [listCatched]);
   return (
-    <Container maxW="container.lg" mt={100}>
+    <Container maxW="container.lg" mt={"80px"}>
       <Heading
         as="h1"
         size="lg"

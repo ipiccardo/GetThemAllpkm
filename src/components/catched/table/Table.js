@@ -15,6 +15,7 @@ import {
   Heading,
   Box,
   Skeleton,
+  position,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { colorTipos } from "../../../utils/colorTypes";
@@ -30,7 +31,7 @@ const CatchedTable = ({ listCatched }) => {
 
   return (
     <Flex alignItems="center" minH="100vh" justifyContent="center">
-      <Container maxW="container.lg" mt={10}>
+      <Container maxW="container.lg" mt={10} position={"absolute"} top={0}>
         <>
           <Heading
             as="h1"
@@ -39,7 +40,7 @@ const CatchedTable = ({ listCatched }) => {
             textAlign="center"
             borderBottom="1px solid burlywood"
             pb={2}
-            mt={50}
+            mt={"40px"}
           >
             <Box textColor={"rgb(101, 67, 33)"}>My Team</Box>
           </Heading>
