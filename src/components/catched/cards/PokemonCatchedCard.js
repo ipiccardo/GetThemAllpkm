@@ -29,7 +29,8 @@ const PokemonCatchedCard = ({ pokemon, fromCatched }) => {
         <Box p="6">
           <Box d="flex" alignItems="start">
             <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight">
-              {pokemon.name}
+              {pokemon.name.charAt(0).toUpperCase() +
+                pokemon.name.slice(1).toLowerCase()}
             </Box>
             <HStack spacing={2}>
               {pokemon.types.map((type, index) => (
