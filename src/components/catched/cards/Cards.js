@@ -33,9 +33,7 @@ const CatchedCards = ({ listCatched }) => {
         endColor={"var(--chakra-colors-gray-200)"}
         height={"80vh"}
       >
-        <Box textColor={"rgb(101, 67, 33)"}>
-          Total atrapados: {listCatched?.length}
-        </Box>
+        <Box textColor={"rgb(101, 67, 33)"}>Catched: {listCatched?.length}</Box>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="40px">
           {listCatched?.map((pokemon) => (
             <PokemonCatchedCard

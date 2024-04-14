@@ -50,7 +50,7 @@ const CatchedTable = ({ listCatched }) => {
             height={500}
           >
             <Box textColor={"rgb(101, 67, 33)"}>
-              Total atrapados: {listCatched?.length}
+              Catched: {listCatched?.length}
             </Box>
             <TableContainer width={`100%`} mt={10}>
               <Table variant="simple">
@@ -64,7 +64,10 @@ const CatchedTable = ({ listCatched }) => {
                 <Tbody>
                   {listCatched?.map((pokemon) => (
                     <Tr key={pokemon.id}>
-                      <Td>{pokemon.name}</Td>
+                      <Td>
+                        {pokemon.name.charAt(0).toUpperCase() +
+                          pokemon.name.slice(1).toLowerCase()}
+                      </Td>
                       <Td>
                         <Stack direction="row">
                           {pokemon.types.map((type, index) => {
