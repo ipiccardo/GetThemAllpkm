@@ -12,6 +12,10 @@
   border-radius: 10px;
   border: solid 1px white;
   margin-top: 15px;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .swal2-container.swal2-top-end > .swal2-popup,

@@ -3,7 +3,7 @@ import styles from "./buttonTypes.module.css";
 import Swal from "sweetalert2";
 import { colorTipos } from "@/utils/colorTypes";
 
-export const ButtonsTypes = ({ setPokeType }) => {
+export const ButtonsTypes = ({ setPokeType, setIsLoading }) => {
   let tipos = [
     "fighting",
     "bug",
@@ -26,6 +26,7 @@ export const ButtonsTypes = ({ setPokeType }) => {
   ];
 
   const handleClick = (e) => {
+    setIsLoading(true);
     setPokeType(e.target.innerHTML);
     Swal.fire({
       background: `var(--${e.target.innerHTML})`,
