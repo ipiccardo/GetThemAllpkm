@@ -43,6 +43,14 @@ const ByTypeGrid = () => {
   );
 
   useEffect(() => {
+    if (filteredPkm.length === 20) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [filteredPkm]);
+
+  useEffect(() => {
     axios
       .get(`api/getByType/?pokeType=${pokeType}`)
       .then((res) => {
@@ -122,14 +130,13 @@ const ByTypeGrid = () => {
               pokemon={filteredPkm}
               isLoading={isLoading}
               handleViewPokemon={handleViewPokemon}
+              currentPage={currentPage}
             />
-            {currentPokemon?.length && (
-              <Pagination
-                setPage={setCurrentPage}
-                page={currentPage}
-                pageCount={pokemonPerPage}
-              />
-            )}
+            <Pagination
+              setPage={setCurrentPage}
+              page={currentPage}
+              pageCount={pokemonPerPage}
+            />
           </Stack>
         </Container>
       </Flex>
