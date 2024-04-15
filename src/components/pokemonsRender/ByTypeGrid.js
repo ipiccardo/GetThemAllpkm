@@ -50,8 +50,7 @@ const ByTypeGrid = () => {
     setIsLoading(false);
   }, [pokeType]);
 
-  const indexOfLastPokemon =
-    currentPage > 0 ? currentPage * pokemonPerPage : 20;
+  const indexOfLastPokemon = (currentPage + 1) * pokemonPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
   const currentPokemon = filteredTypePkmName?.slice(
     indexOfFirstPokemon,
