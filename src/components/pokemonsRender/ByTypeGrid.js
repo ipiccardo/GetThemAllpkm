@@ -106,10 +106,13 @@ const ByTypeGrid = () => {
 
   return (
     <>
-      <ButtonsTypes setPokeType={setPokeType} setIsLoading={setIsLoading} />
       <Flex alignItems="center" minH="100vh" justifyContent="center">
         <Container p="10" maxW="container.lg">
           <Stack pt="5" alignItems="center" spacing="5">
+            <ButtonsTypes
+              setPokeType={setPokeType}
+              setIsLoading={setIsLoading}
+            />
             <Grilla
               key={ByTypeGrid}
               pokemon={filteredPkm}
