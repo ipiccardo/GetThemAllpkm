@@ -12,6 +12,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { colorTipos } from "@/utils/colorTypes";
+import styles from "../pokeScreen.module.css";
 
 const MoveTableData = ({ orderedMoveData }) => {
   return (
@@ -69,7 +70,7 @@ const MoveTableData = ({ orderedMoveData }) => {
                   <Td>{accuracy || "-"}</Td>
                   <Td>{pp}</Td>
                   <Td>{method}</Td>
-                  <Td>
+                  <Td className={styles.description}>
                     {effect_entries[0] &&
                       effect_entries[0].short_effect.replace(
                         "$effect_chance",
