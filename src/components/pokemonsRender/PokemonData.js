@@ -13,6 +13,7 @@ import { colorTipos } from "@/utils/colorTypes";
 import axios from "axios";
 import { useState } from "react";
 import styles from "./pokemonrender.module.css";
+import Link from "next/link";
 
 export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
   const { weight, height, moves, types, sprites } = pokemon;
@@ -122,6 +123,12 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
           <Text fontSize="xs">attack</Text>
           <Progress bg="gray.300" borderRadius="full" value={attack.baseStat} />
         </Stack>
+      </Stack>
+
+      <Stack>
+        <Link href={`${pokemon.name}`} className={styles.link}>
+          Ver detalle
+        </Link>
       </Stack>
     </Stack>
   );
