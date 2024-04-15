@@ -42,6 +42,7 @@ const ByTypeGrid = () => {
       .then((res) => {
         setFilteredType(res.data);
         setFilteredTypePkmName(res.data.pokemon);
+        setCurrentPage(0);
       })
 
       .catch((error) => {
@@ -60,17 +61,22 @@ const ByTypeGrid = () => {
   useEffect(() => {
     setFilteredPkm([]);
     setIsLoading(true);
-    currentPokemon?.map((pkm) => {
-      axios
-        .get(`api/getByName/?name=${pkm.pokemon.name}`)
-        .then((res) => {
-          setFilteredPkm((prevFilteredPkm) => [...prevFilteredPkm, res.data]);
+    const promises = currentPokemon?.map((pkm) => {
+      return axios.get(`api/getByName/?name=${pkm.pokemon.name}`);
+    });
+    if (promises) {
+      Promise.all(promises)
+        .then((responses) => {
+          const loadedPokemon = responses.map((res) => res.data);
+          setFilteredPkm(loadedPokemon);
           setIsLoading(false);
+          setAllPokemonLoaded(true);
         })
         .catch((error) => {
           console.error("Error al llamar a la API:", error);
+          setIsLoading(false);
         });
-    });
+    }
   }, [filteredTypePkmName, currentPage]);
 
   useEffect(() => {
