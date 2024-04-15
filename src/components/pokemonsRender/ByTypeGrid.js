@@ -4,22 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Grilla from "./Grilla";
 import Pagination from "../Pagination/Pagination";
-import {
-  Container,
-  Stack,
-  SimpleGrid,
-  Flex,
-  Box,
-  Modal,
-  ModalOverlay,
-  ModalHeader,
-  ModalBody,
-  ModalContent,
-  ModalCloseButton,
-  useDisclosure,
-  Skeleton,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Container, Stack, Flex, useDisclosure } from "@chakra-ui/react";
 import PokemonModal from "./Modal";
 
 const ByTypeGrid = () => {
