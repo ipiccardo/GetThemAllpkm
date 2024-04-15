@@ -38,6 +38,25 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --bug: #a4ac4e;
+  --dark: #74645d;
+  --dragon: #8073c4;
+  --electric: #f2c443;
+  --fairy: #fab2fc;
+  --fighting: #944b41;
+  --fire: #e84d25;
+  --flying: #b2b7ff;
+  --ghost: #5f5a91;
+  --grass: #89d861;
+  --ground: #cbb37d;
+  --ice: #58bdd1;
+  --normal: #a3a2a1;
+  --poison: #9e6890;
+  --psychic: #e884a6;
+  --rock: #c69e69;
+  --steel: #bbb8cc;
+  --water: #56a1f2;
 }
 
 @media (prefers-color-scheme: dark) {
