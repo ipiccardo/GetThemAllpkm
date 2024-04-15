@@ -11,7 +11,7 @@ import PokemonCard from "./PokemonCard";
 import LoadingDashboard from "../loader/LoadingDashboard";
 import styles from "./pokemonrender.module.css";
 
-const Grilla = ({ pokemon, handleViewPokemon, isLoading }) => {
+const Grilla = ({ pokemon, handleViewPokemon, isLoading, currentPage }) => {
   const [isLargerThan766] = useMediaQuery("(min-width: 766px)");
   const skeletonWidth = useBreakpointValue({
     base: "100%",

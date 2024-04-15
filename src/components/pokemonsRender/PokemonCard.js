@@ -16,16 +16,14 @@ export default function PokemonCard({ pokemon, singlePokemon }) {
         spacing="5"
         boxShadow="xl"
         p="5"
-        // w="full"
+        w="full"
         borderRadius="xl"
         alignItems="center"
       >
-        {/* <AspectRatio w="full" ratio={1}> */}
         <Image
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
           alt={`${pokemon.name}`}
         />
-        {/* </AspectRatio> */}
         <Text textAlign="center" textTransform="Capitalize">
           {pokemon.name}
         </Text>

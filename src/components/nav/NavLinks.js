@@ -15,6 +15,10 @@ const NavLinks = () => {
       name: "Catched",
       href: "/catched",
     },
+    {
+      name: "Filter",
+      href: "/filter",
+    },
   ];
 
   return (
