@@ -16,7 +16,7 @@ export default function PokemonCard({ pokemon, singlePokemon }) {
         spacing="5"
         boxShadow="xl"
         p="5"
-        // w="full"
+        w="full"
         borderRadius="xl"
         alignItems="center"
       >

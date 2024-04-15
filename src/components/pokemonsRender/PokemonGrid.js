@@ -26,13 +26,11 @@ import PokemonCard from "@/components/pokemonsRender/PokemonCard";
 import PokemonData from "./PokemonData";
 import CustomPagination from "../Pagination/Pagination";
 import SearchBar from "../searchBar/SearchBar";
-import LoadingDashboard from "../loader/LoadingDashboard";
 import Grilla from "./Grilla";
 import PokemonModal from "./Modal";
 
 const PokemonGrid = () => {
   const pokemonDataModal = useDisclosure();
-  const [isLargerThan766] = useMediaQuery("(min-width: 766px)");
   const [page, setPage] = useState(0);
   const pageCount = 58;
 
@@ -131,7 +129,6 @@ const PokemonGrid = () => {
       </Container>
     </Flex>
   ) : (
-    // <Flex alignItems="center" minH="100vh" justifyContent="center">
     <Container p="10" maxW="container.lg">
       <Stack pt="5" alignItems="center" spacing="5">
         <SearchBar
@@ -165,7 +162,6 @@ const PokemonGrid = () => {
         />
       </Stack>
     </Container>
-    // </Flex>
   );
 };
 
