@@ -81,7 +81,7 @@ export const PokeScreen = () => {
             </Flex>
           </Box>
         </Flex>
-        <Box marginLeft="50" marginTop="50">
+        <Box marginTop="50">
           <AbilityTable abilities={abilities} />
           <StatTable stats={stats} />
           <MoveTable moves={moves} />
