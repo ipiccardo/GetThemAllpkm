@@ -17,7 +17,7 @@ const CatchedCards = ({ listCatched }) => {
     }
   }, [listCatched]);
   return (
-    <Container maxW="container.lg" mt={"80px"}>
+    <Container maxW="container.lg" p={10} pt={0}>
       <Heading
         as="h1"
         size="lg"
@@ -25,6 +25,7 @@ const CatchedCards = ({ listCatched }) => {
         textAlign="center"
         borderBottom="1px solid burlywood"
         pb={2}
+        mt={"30px"}
       >
         <Box textColor={"rgb(101, 67, 33)"}>My Team</Box>
       </Heading>

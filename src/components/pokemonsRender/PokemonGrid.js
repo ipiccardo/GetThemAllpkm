@@ -99,7 +99,7 @@ const PokemonGrid = () => {
 
   return Object.keys(singlePokemon).length === 0 ? (
     <Flex alignItems="center" minH="100vh" justifyContent="center">
-      <Container p="10" maxW="container.lg">
+      <Container p="10" pt="0" maxW="container.lg">
         <Stack pt="5" alignItems="center" spacing="5">
           <SearchBar
             setSinglePokemon={setSinglePokemon}
