@@ -12,9 +12,9 @@ import {
 import { colorTipos } from "@/utils/colorTypes";
 import AbilityTable from "./abilityTable/AbilityTable";
 import StatTable from "./statTable/StatTable";
-import MoveTable from "./moveTable/moveTable";
+import MoveTable from "./moveTable/MoveTable";
 import axios from "axios";
-import styles from "./PokeScreen.module.css";
+import styles from "./pokeScreen.module.css";
 import pokebolaImage from "/public/pokebola.jpg";
 
 export const PokeScreen = () => {

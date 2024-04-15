@@ -11,7 +11,7 @@ import {
   Box,
   Heading,
 } from "@chakra-ui/react";
-import styles from "./StatTable.module.css";
+import styles from "./statTable.module.css";
 
 const StatTable = ({ stats }) => {
   return (
