@@ -35,8 +35,14 @@ const ByTypeGrid = () => {
   const [isCatched, setIsCatched] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState();
 
+  const indexOfLastPokemon = (currentPage + 1) * pokemonPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
+  const currentPokemon = filteredTypePkmName?.slice(
+    indexOfFirstPokemon,
+    indexOfLastPokemon
+  );
+
   useEffect(() => {
-    setIsLoading(true);
     axios
       .get(`api/getByType/?pokeType=${pokeType}`)
       .then((res) => {
@@ -48,20 +54,12 @@ const ByTypeGrid = () => {
       .catch((error) => {
         console.error("Error al llamar a la API:", error);
       });
-    setIsLoading(false);
   }, [pokeType]);
 
-  const indexOfLastPokemon = (currentPage + 1) * pokemonPerPage;
-  const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
-  const currentPokemon = filteredTypePkmName?.slice(
-    indexOfFirstPokemon,
-    indexOfLastPokemon
-  );
-
   useEffect(() => {
-    setFilteredPkm([]);
     setIsLoading(true);
-    const promises = currentPokemon?.map((pkm) => {
+    setFilteredPkm([]);
+    const promises = currentPokemon.map((pkm) => {
       return axios.get(`api/getByName/?name=${pkm.pokemon.name}`);
     });
     if (promises) {
@@ -69,11 +67,11 @@ const ByTypeGrid = () => {
         .then((responses) => {
           const loadedPokemon = responses.map((res) => res.data);
           setFilteredPkm(loadedPokemon);
-          setIsLoading(false);
-          setAllPokemonLoaded(true);
         })
         .catch((error) => {
           console.error("Error al llamar a la API:", error);
+        })
+        .finally(() => {
           setIsLoading(false);
         });
     }
@@ -125,11 +123,13 @@ const ByTypeGrid = () => {
               isLoading={isLoading}
               handleViewPokemon={handleViewPokemon}
             />
-            <Pagination
-              setPage={setCurrentPage}
-              page={currentPage}
-              pageCount={pokemonPerPage}
-            />
+            {currentPokemon?.length && (
+              <Pagination
+                setPage={setCurrentPage}
+                page={currentPage}
+                pageCount={pokemonPerPage}
+              />
+            )}
           </Stack>
         </Container>
       </Flex>

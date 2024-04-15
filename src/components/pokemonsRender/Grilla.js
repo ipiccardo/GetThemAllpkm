@@ -47,7 +47,7 @@ const Grilla = ({ pokemon, handleViewPokemon, isLoading }) => {
               />
             </Flex>
           ) : (
-            pokemon?.map((pokemon) => (
+            pokemon.map((pokemon) => (
               <Box
                 as="button"
                 key={pokemon.id}
@@ -73,7 +73,7 @@ const Grilla = ({ pokemon, handleViewPokemon, isLoading }) => {
         {isLoading ? (
           <LoadingDashboard />
         ) : (
-          pokemon?.map((pokemon) => (
+          pokemon.map((pokemon) => (
             <Box
               as="button"
               key={pokemon.id}
