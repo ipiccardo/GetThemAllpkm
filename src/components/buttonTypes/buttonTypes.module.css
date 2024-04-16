@@ -22,3 +22,13 @@
 .swal2-container.swal2-top-right > .swal2-popup {
   margin-top: 60px !important;
 }
+
+.active {
+  opacity: 0.6;
+  transition: background-color 0.3s !important;
+  cursor: not-allowed;
+}
+
+.defaultButton:hover {
+  background-color: black !important;
+}

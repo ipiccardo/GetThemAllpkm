@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./buttonTypes.module.css";
 import Swal from "sweetalert2";
 import { colorTipos } from "@/utils/colorTypes";
+import pokeicon from "../../../public/pokeicon.svg";
 
 export const ButtonsTypes = ({ setPokeType, setIsLoading }) => {
+  const [activeButton, setActiveButton] = useState("normal");
+
   let tipos = [
     "fighting",
     "bug",
@@ -26,18 +29,19 @@ export const ButtonsTypes = ({ setPokeType, setIsLoading }) => {
   ];
 
   const handleClick = (e) => {
+    const typeName = e.target.innerHTML;
     setIsLoading(true);
-    setPokeType(e.target.innerHTML);
+    setPokeType(typeName);
+    setActiveButton(typeName);
+
     Swal.fire({
-      background: `var(--${e.target.innerHTML})`,
+      background: `var(--${typeName})`,
       color: "#fff",
       padding: "1em",
       position: "top-right",
       showConfirmButton: false,
       timer: 2000,
-      title: `${
-        e.target.innerHTML[0].toUpperCase() + e.target.innerHTML.substring(1)
-      } type!`,
+      title: `${typeName[0].toUpperCase() + typeName.substring(1)} type!`,
       toast: true,
       width: "200px",
     });
@@ -54,10 +58,28 @@ export const ButtonsTypes = ({ setPokeType, setIsLoading }) => {
                 backgroundColor: colorTipos(tipo),
                 width: 80,
                 color: "white",
+                position: "relative",
               }}
               key={tipo}
+              disabled={activeButton === tipo}
+              className={
+                activeButton === tipo ? styles.active : styles.defaultButton
+              }
             >
               {tipo}
+              {activeButton === tipo && (
+                <img
+                  src={`/pokeicon.svg`}
+                  alt="Pokeball"
+                  style={{
+                    position: "absolute",
+                    top: "-10px",
+                    right: "-5px",
+                    width: "18px",
+                    height: "18px",
+                  }}
+                />
+              )}
             </button>
           );
         })}
