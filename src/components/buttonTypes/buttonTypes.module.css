@@ -29,6 +29,12 @@
   cursor: not-allowed;
 }
 
+.defaultButton {
+  transform: translateY(0);
+  transition: transform 0.35s ease-in-out;
+  overflow: hidden;
+}
+
 .defaultButton:hover {
-  background-color: black !important;
+  transform: translateY(-10px);
 }
