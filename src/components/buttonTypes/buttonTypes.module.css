@@ -22,3 +22,19 @@
 .swal2-container.swal2-top-right > .swal2-popup {
   margin-top: 60px !important;
 }
+
+.active {
+  opacity: 0.6;
+  transition: background-color 0.3s !important;
+  cursor: not-allowed;
+}
+
+.defaultButton {
+  transform: translateY(0);
+  transition: transform 0.35s ease-in-out;
+  overflow: hidden;
+}
+
+.defaultButton:hover {
+  transform: translateY(-10px);
+}
