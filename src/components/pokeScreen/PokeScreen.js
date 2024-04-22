@@ -69,6 +69,7 @@ export const PokeScreen = () => {
                   key={index}
                   className="type"
                   backgroundColor={colorTipos(name)}
+                  color={"white"}
                   marginRight="2"
                 >
                   {name.toUpperCase()}
