@@ -12,7 +12,8 @@ const SearchBar = ({
 }) => {
   const [searchValue, setSearchValue] = useState("");
 
-  function handleSearch() {
+  function handleSearch(e) {
+    e.preventDefault();
     if (searchValue !== "" && Object.keys(singlePokemon).length === 0) {
       setIsLoading(true);
     }
@@ -52,8 +53,6 @@ const SearchBar = ({
     setErrorMessage("");
     if (errorMessage !== "" && searchValue !== "") {
       setErrorMessage("");
-      // setSearchValue("");
-      // setSinglePokemon({});
     }
   };
 
@@ -63,7 +62,7 @@ const SearchBar = ({
   };
 
   return (
-    <>
+    <form onSubmit={handleSearch}>
       <div className={styles.container}>
         {singlePokemon && Object.keys(singlePokemon).length !== 0 && (
           <button
@@ -86,13 +85,19 @@ const SearchBar = ({
           placeholder="Search..."
           onInput={handleCleanInput}
           onFocus={handleFocus}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleSearch(e);
+            }
+          }}
         />
-        <button className={styles.button} onClick={handleSearch}>
+        <button className={styles.button} type="submit">
           <FaSearch />
         </button>
       </div>
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-    </>
+    </form>
   );
 };
 
