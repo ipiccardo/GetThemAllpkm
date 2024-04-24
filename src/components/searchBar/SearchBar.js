@@ -64,11 +64,12 @@ const SearchBar = ({
   };
 
   useEffect(() => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
+    if (Object.keys(singlePokemon).length !== 0) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 300);
+    }
   }, [singlePokemon]);
 
   return (
