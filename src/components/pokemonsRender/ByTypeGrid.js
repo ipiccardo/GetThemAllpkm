@@ -53,7 +53,9 @@ const ByTypeGrid = () => {
     setIsLoading(true);
     setFilteredPkm([]);
     const promises = currentPokemon.map((pkm) => {
-      return axios.get(`api/getByName/?name=${pkm.pokemon.name}`);
+      return axios.get(
+        `api/getByName/?name=${pkm.pokemon.name}&url=${pkm.pokemon.url}`
+      );
     });
     if (promises) {
       Promise.all(promises)

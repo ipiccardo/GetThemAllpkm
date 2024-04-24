@@ -97,7 +97,7 @@ const PokemonGrid = () => {
       });
   }
 
-  return Object.keys(singlePokemon).length === 0 ? (
+  return !singlePokemon.length ? (
     <Flex alignItems="center" minH="100vh" justifyContent="center">
       <Container p="10" pt="0" maxW="container.lg">
         <Stack pt="5" alignItems="center" spacing="5">
@@ -138,7 +138,12 @@ const PokemonGrid = () => {
           setErrorMessage={setErrorMessage}
           errorMessage={errorMessage}
         />
-        <Box
+        <Grilla
+          pokemon={singlePokemon}
+          handleViewPokemon={handleViewPokemon}
+          isLoading={isLoading}
+        />
+        {/* <Box
           as="button"
           key={singlePokemon.id}
           onClick={() => handleViewPokemon(singlePokemon)}
@@ -152,7 +157,7 @@ const PokemonGrid = () => {
             fromCatched={false}
             singlePokemon={singlePokemon}
           />
-        </Box>
+        </Box> */}
         <PokemonModal
           isOpen={pokemonDataModal.isOpen}
           onClose={pokemonDataModal.onClose}

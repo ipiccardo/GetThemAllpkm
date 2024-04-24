@@ -16,7 +16,7 @@ import styles from "./pokemonrender.module.css";
 import Link from "next/link";
 
 export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
-  const { weight, height, moves, types, sprites } = pokemon;
+  const { weight, height, moves, types, sprites, id } = pokemon;
 
   const stats = pokemon.stats.map((stat) => {
     const baseStat = stat.base_stat;
@@ -126,7 +126,7 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
       </Stack>
 
       <Stack>
-        <Link href={`${pokemon.name}`} className={styles.link}>
+        <Link href={`${pokemon.id}`} className={styles.link}>
           Ver detalle
         </Link>
       </Stack>

@@ -22,12 +22,12 @@ export const PokeScreen = () => {
   const [pokeData, setPokeData] = useState({});
   const [loading, setLoading] = useState(true);
   const nameInArray = pathName?.split("/");
-  const name = nameInArray && nameInArray[1];
+  const id = nameInArray && nameInArray[1];
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`api/getByName/?name=${name}`)
+      .get(`api/getById/?id=${id}`)
       .then((res) => {
         const pokemonData = res.data;
         setPokeData(pokemonData);
@@ -37,9 +37,9 @@ export const PokeScreen = () => {
         console.error("Error fetching Pokemon data:", error);
         setLoading(false);
       });
-  }, [name]);
+  }, [id]);
 
-  const { id, sprites, types, stats, moves, abilities, height, weight } =
+  const { name, sprites, types, stats, moves, abilities, height, weight } =
     pokeData;
 
   return (
@@ -61,7 +61,7 @@ export const PokeScreen = () => {
           </Box>
           <Box className="animate__animated animate__fadeIn pokeScreen-info">
             <Heading as="h1" textAlign="left">
-              #{id} {name ? name[0].toUpperCase() + name?.substring(1) : null}
+              {name ? name[0].toUpperCase() + name?.substring(1) : null}
             </Heading>
             <Flex className="typosEnPokeScreen" position="relative">
               {types?.map(({ type: { name } }, index) => (
