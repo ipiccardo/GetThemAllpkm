@@ -5,10 +5,6 @@ export default async function handler(req, res) {
   const { url } = req.query;
 
   try {
-    const data = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon?limit=1302`
-    );
-
     if (url) {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${name
@@ -18,6 +14,10 @@ export default async function handler(req, res) {
       const pokemon = response.data;
       res.status(200).json(pokemon);
     } else {
+      const data = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon?limit=1302`
+      );
+
       const filteredPokemon =
         data.data.results.length > 1
           ? data.data.results.filter((pokemon) =>
@@ -47,21 +47,3 @@ export default async function handler(req, res) {
     }
   }
 }
-
-//   try {
-//     const response = await axios.get(
-//       `https://pokeapi.co/api/v2/pokemon/${name
-//         .toLowerCase()
-//         .replace(/\s+/g, "-")}`
-//     );
-//     const pokemon = response.data;
-//     res.status(200).json(pokemon);
-//   } catch (error) {
-//     if (error.response.data === "Not Found") {
-//       res.status(404).json({ message: "El Pokémon no existe" });
-//     } else {
-//       console.error("Error fetching Pokémon:", error);
-//       res.status(500).json({ message: "Hubo un error al buscar el Pokémon" });
-//     }
-//   }
-// }
