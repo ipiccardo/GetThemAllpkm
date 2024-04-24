@@ -33,6 +33,8 @@ const SearchBar = ({
         if (Object.keys(pokemonData).length !== 0) {
           setSinglePokemon(pokemonData);
           setErrorMessage("");
+        } else {
+          setErrorMessage("El pokemon buscado no existe");
         }
       })
       .catch((error) => {
@@ -60,6 +62,14 @@ const SearchBar = ({
     setErrorMessage("");
     setSearchValue("");
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+  }, [singlePokemon]);
 
   return (
     <form onSubmit={handleSearch}>
