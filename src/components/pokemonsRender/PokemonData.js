@@ -91,11 +91,11 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
             <Text>{height}</Text>
           </Stack>
           <Stack>
-            <Text fontSize="sm">Movimientos</Text>
+            <Text fontSize="sm">Movements</Text>
             <Text>{moves.length}</Text>
           </Stack>
           <Stack>
-            <Text fontSize="sm">Tipos</Text>
+            <Text fontSize="sm">Types</Text>
             <div className={styles.typesContainer}>
               {types.map((type, index) => {
                 return (
