@@ -62,31 +62,32 @@ const Grilla = ({ pokemon, handleViewPokemon, isLoading, currentPage }) => {
       </>
     );
   }
-
-  return (
-    <>
-      <SimpleGrid
-        mt="5"
-        spacing="5"
-        columns={{ base: 1, md: 5 }}
-        w={{ base: "60%", md: "100%" }}
-      >
-        {isLoading ? (
-          <LoadingDashboard />
-        ) : (
-          pokemon.map((pokemon) => (
-            <Box
-              as="button"
-              key={pokemon.id}
-              onClick={() => handleViewPokemon(pokemon)}
-            >
-              <PokemonCard pokemon={pokemon} isLoading={isLoading} />
-            </Box>
-          ))
-        )}
-      </SimpleGrid>
-    </>
-  );
+  if (isLargerThan766) {
+    return (
+      <>
+        <SimpleGrid
+          mt="5"
+          spacing="5"
+          columns={{ base: 1, md: 5 }}
+          w={{ base: "60%", md: "100%" }}
+        >
+          {isLoading ? (
+            <LoadingDashboard />
+          ) : (
+            pokemon.map((pokemon) => (
+              <Box
+                as="button"
+                key={pokemon.id}
+                onClick={() => handleViewPokemon(pokemon)}
+              >
+                <PokemonCard pokemon={pokemon} isLoading={isLoading} />
+              </Box>
+            ))
+          )}
+        </SimpleGrid>
+      </>
+    );
+  }
 };
 
 export default Grilla;
