@@ -44,6 +44,17 @@ export default function PokemonCard({ pokemon, singlePokemon }) {
     );
   }
 
+  const pokemonWithoutPic = [
+    "10080",
+    "10081",
+    "10082",
+    "10083",
+    "10084",
+    "10085",
+    "10061",
+    "10158",
+  ];
+
   return (
     <Stack
       spacing="5"
@@ -55,7 +66,13 @@ export default function PokemonCard({ pokemon, singlePokemon }) {
     >
       <AspectRatio w="full" ratio={1}>
         <Image
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+          src={
+            pokemonWithoutPic.some(
+              (id) => id.toString() === pokemon.id.toString()
+            )
+              ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
+              : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`
+          }
           alt={`${pokemon.name}`}
         />
       </AspectRatio>
