@@ -125,7 +125,9 @@ const ByTypeGrid = () => {
             <Pagination
               setPage={setCurrentPage}
               page={currentPage}
-              pageCount={pokemonPerPage}
+              pageCount={Math.floor(
+                filteredType.pokemon?.length / pokemonPerPage
+              )}
             />
           </Stack>
         </Container>

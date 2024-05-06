@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import styles from "./buttonTypes.module.css";
 import Swal from "sweetalert2";
 import { colorTipos } from "@/utils/colorTypes";
-import pokeicon from "../../../public/pokeicon.svg";
-import Image from "next/image";
 
 export const ButtonsTypes = ({ setPokeType, setIsLoading }) => {
   const [activeButton, setActiveButton] = useState("normal");
@@ -69,7 +67,7 @@ export const ButtonsTypes = ({ setPokeType, setIsLoading }) => {
             >
               {tipo}
               {activeButton === tipo && (
-                <Image
+                <img
                   src={`/pokeicon.svg`}
                   alt="Pokeball"
                   style={{
