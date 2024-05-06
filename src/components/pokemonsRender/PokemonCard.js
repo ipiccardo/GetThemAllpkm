@@ -8,8 +8,14 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { colorTipos } from "@/utils/colorTypes";
+import { useState, useEffect } from "react";
+import styles from "./pokemonrender.module.css";
 
 export default function PokemonCard({ pokemon, singlePokemon }) {
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(true);
+
   if (singlePokemon) {
     return (
       <Stack
@@ -44,16 +50,30 @@ export default function PokemonCard({ pokemon, singlePokemon }) {
     );
   }
 
-  const pokemonWithoutPic = [
-    "10080",
-    "10081",
-    "10082",
-    "10083",
-    "10084",
-    "10085",
-    "10061",
-    "10158",
-  ];
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const response = await fetch(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch image");
+        }
+
+        setImageUrl(response.url);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+        setImageUrl(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
+        );
+        setIsLoading(false);
+      }
+    };
+
+    fetchImage();
+  }, [pokemon.id]);
 
   return (
     <Stack
@@ -65,16 +85,11 @@ export default function PokemonCard({ pokemon, singlePokemon }) {
       alignItems="center"
     >
       <AspectRatio w="full" ratio={1}>
-        <Image
-          src={
-            pokemonWithoutPic.some(
-              (id) => id.toString() === pokemon.id.toString()
-            )
-              ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
-              : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`
-          }
-          alt={`${pokemon.name}`}
-        />
+        {isLoading ? (
+          <div style={{ width: "100%", height: "100%" }} />
+        ) : (
+          <Image objectFit="contain" src={imageUrl} alt={`${pokemon.name}`} />
+        )}
       </AspectRatio>
       <Text textAlign="center" textTransform="Capitalize">
         {pokemon.name}

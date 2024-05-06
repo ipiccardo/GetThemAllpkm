@@ -11,12 +11,16 @@ import {
 } from "@chakra-ui/react";
 import { colorTipos } from "@/utils/colorTypes";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./pokemonrender.module.css";
 import Link from "next/link";
 
 export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
   const { weight, height, moves, types, sprites, id } = pokemon;
+
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const stats = pokemon.stats.map((stat) => {
     const baseStat = stat.base_stat;
@@ -66,16 +70,30 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
     }
   };
 
-  const pokemonWithoutPic = [
-    "10080",
-    "10081",
-    "10082",
-    "10083",
-    "10084",
-    "10085",
-    "10061",
-    "10158",
-  ];
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const response = await fetch(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch image");
+        }
+
+        setImageUrl(response.url);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+        setImageUrl(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
+        );
+        setIsLoading(false);
+      }
+    };
+
+    fetchImage();
+  }, [pokemon.id]);
 
   return (
     <Stack spacing="5" pb="5">
@@ -86,17 +104,14 @@ export default function PokemonData({ pokemon, isCatched, onUpdateCatched }) {
           </Checkbox>
         </Box>
         <AspectRatio w="full" ratio={1}>
-          <Image
-            objectFit="contain"
-            src={
-              pokemonWithoutPic.some(
-                (id) => id.toString() === pokemon.id.toString()
-              )
-                ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
-                : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`
-            }
-            alt={`${pokemon.name}`}
-          />
+          {isLoading ? (
+            <div
+              className={styles.skeleton}
+              style={{ width: "100%", height: "100%" }}
+            />
+          ) : (
+            <Image objectFit="contain" src={imageUrl} alt={`${pokemon.name}`} />
+          )}
         </AspectRatio>
         <Stack direction="row" spacing="5">
           <Stack>
