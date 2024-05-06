@@ -16,6 +16,31 @@ export default function PokemonCard({ pokemon, singlePokemon }) {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const response = await fetch(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch image");
+        }
+
+        setImageUrl(response.url);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+        setImageUrl(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
+        );
+        setIsLoading(false);
+      }
+    };
+
+    fetchImage();
+  }, [pokemon.id]);
+
   if (singlePokemon) {
     return (
       <Stack
@@ -49,31 +74,6 @@ export default function PokemonCard({ pokemon, singlePokemon }) {
       </Stack>
     );
   }
-
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        const response = await fetch(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch image");
-        }
-
-        setImageUrl(response.url);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching image:", error);
-        setImageUrl(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`
-        );
-        setIsLoading(false);
-      }
-    };
-
-    fetchImage();
-  }, [pokemon.id]);
 
   return (
     <Stack

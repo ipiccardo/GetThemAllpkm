@@ -70,7 +70,7 @@ const SearchBar = ({
         setIsLoading(false);
       }, 300);
     }
-  }, [singlePokemon]);
+  }, [singlePokemon, setIsLoading]);
 
   return (
     <form onSubmit={handleSearch}>
